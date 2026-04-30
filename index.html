@@ -13,17 +13,17 @@
     <!-- ייבוא Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- הגדרות צבעים תואמות למודעה (כחול-נייבי, תכלת זוהר, אפור-כחלחל) -->
+    <!-- הגדרות צבעים תואמות למודעה -->
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
                         brand: {
-                            dark: '#0b1d3a',   // כחול-נייבי עמוק (רקעים כהים)
-                            blue: '#1a5ebd',   // כחול רויאל (כפתורים ואייקונים)
-                            cyan: '#00b4d8',   // תכלת זוהר/בהיר (מעברונים וזוהר)
-                            light: '#eef5fc',  // אפור-כחלחל בהיר (רקעי קלפים)
+                            dark: '#0b1d3a',   // כחול-נייבי עמוק
+                            blue: '#1a5ebd',   // כחול רויאל
+                            cyan: '#00b4d8',   // תכלת זוהר
+                            light: '#eef5fc',  // אפור-כחלחל בהיר
                         }
                     },
                     fontFamily: {
@@ -40,7 +40,6 @@
     <style>
         html { scroll-behavior: smooth; }
         
-        /* טקסט זוהר תכלת-כחול */
         .ai-gradient-text {
             background: linear-gradient(to left, #1a5ebd, #00b4d8, #1a5ebd);
             -webkit-background-clip: text;
@@ -53,7 +52,6 @@
             to { background-position: 200% center; }
         }
 
-        /* רקע גיבור מתקדם בסגנון נייבי/רשת */
         .hero-bg {
             background: radial-gradient(circle at top right, #11366b 0%, #0b1d3a 100%);
             position: relative;
@@ -70,7 +68,6 @@
             opacity: 0.8;
         }
 
-        /* כפתור פועם */
         .pulse-btn {
             box-shadow: 0 0 0 0 rgba(26, 94, 189, 0.7);
             animation: pulse 2s infinite;
@@ -81,53 +78,17 @@
             100% { box-shadow: 0 0 0 0 rgba(26, 94, 189, 0); }
         }
 
-        /* בועות צ'אט */
-        .chat-bubble {
-            position: relative;
-            background: white;
-            border-radius: 1rem;
-            border-bottom-right-radius: 0;
-        }
-        .ai-bubble {
-            position: relative;
-            background: #eef5fc;
-            border: 1px solid #d1e2f3;
-            border-radius: 1rem;
-            border-bottom-left-radius: 0;
-        }
-
-        /* גלי קול תכלת/כחול */
-        .voice-wave-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 4px;
-            height: 40px;
-        }
-        .voice-bar {
-            width: 4px;
-            background: linear-gradient(to top, #00b4d8, #1a5ebd);
-            border-radius: 999px;
-            animation: soundWave 1s ease-in-out infinite alternate;
-        }
-        .voice-bar:nth-child(1) { height: 12px; animation-delay: 0.0s; }
-        .voice-bar:nth-child(2) { height: 24px; animation-delay: 0.1s; }
-        .voice-bar:nth-child(3) { height: 36px; animation-delay: 0.2s; }
-        .voice-bar:nth-child(4) { height: 28px; animation-delay: 0.3s; }
-        .voice-bar:nth-child(5) { height: 16px; animation-delay: 0.4s; }
-
-        @keyframes soundWave {
-            0% { transform: scaleY(0.4); opacity: 0.7; }
-            100% { transform: scaleY(1); opacity: 1; }
-        }
-
-        /* אנימציית הקלדה */
         .typing-cursor::after {
             content: '|';
             animation: blink 1s step-end infinite;
         }
         @keyframes blink {
             50% { opacity: 0; }
+        }
+
+        /* סגנון לטופס הפופאפ */
+        .modal-overlay {
+            backdrop-filter: blur(5px);
         }
     </style>
 </head>
@@ -146,9 +107,9 @@
                 </div>
                 <!-- כפתור הרשמה עליון -->
                 <div>
-                    <a href="https://mail.google.com/mail/u/0/?view=cm&fs=1&tf=1&source=mailto&to=6161358@gmail.com&su=%D7%9E%D7%A2%D7%95%D7%A0%D7%99%D7%99%D7%9F%20%D7%9C%D7%94%D7%A6%D7%98%D7%A8%D7%A3%20%D7%9C%D7%9E%D7%99%D7%99%D7%9C%20%D7%A4%D7%95%D7%9F" target="_blank" class="inline-flex items-center justify-center px-6 py-2.5 border border-transparent text-sm font-bold rounded-full text-white bg-brand-blue hover:bg-blue-800 transition duration-300 shadow-lg pulse-btn">
-                        <i class="fas fa-envelope ml-2"></i> לפרטים והצטרפות
-                    </a>
+                    <button onclick="openModal()" class="inline-flex items-center justify-center px-6 py-2.5 border border-transparent text-sm font-bold rounded-full text-white bg-brand-blue hover:bg-blue-800 transition duration-300 shadow-lg pulse-btn cursor-pointer">
+                        <i class="fas fa-edit ml-2"></i> השארת פרטים
+                    </button>
                 </div>
             </div>
         </div>
@@ -156,7 +117,6 @@
 
     <!-- Hero Section -->
     <section class="hero-bg text-white py-20 md:py-28 relative">
-        <!-- עיגול תאורה תכלת זוהר -->
         <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-cyan rounded-full blur-[150px] opacity-20 pointer-events-none"></div>
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -174,13 +134,12 @@
                 </div>
                 
                 <div class="flex flex-col items-center justify-center gap-4 mt-8">
-                    <!-- קישור לג'ימייל -->
-                    <a href="https://mail.google.com/mail/u/0/?view=cm&fs=1&tf=1&source=mailto&to=6161358@gmail.com&su=%D7%9E%D7%A2%D7%95%D7%A0%D7%99%D7%99%D7%9F%20%D7%9C%D7%94%D7%A6%D7%98%D7%A8%D7%A3%20%D7%9C%D7%9E%D7%99%D7%99%D7%9C%20%D7%A4%D7%95%D7%9F" target="_blank" class="inline-flex items-center justify-center px-8 py-4 border border-transparent text-xl font-bold rounded-full text-white bg-brand-blue hover:bg-blue-800 hover:scale-105 transition duration-300 shadow-[0_0_30px_rgba(26,94,189,0.5)] w-full sm:w-auto relative z-10">
-                        <i class="fas fa-envelope-open-text ml-3 text-2xl"></i> לחצו כאן לקבלת פרטים מידית
-                    </a>
+                    <button onclick="openModal()" class="inline-flex items-center justify-center px-8 py-4 border border-transparent text-xl font-bold rounded-full text-white bg-brand-blue hover:bg-blue-800 hover:scale-105 transition duration-300 shadow-[0_0_30px_rgba(26,94,189,0.5)] w-full sm:w-auto relative z-10 cursor-pointer">
+                        <i class="fas fa-paper-plane ml-3 text-2xl"></i> השאירו פרטים לקבלת מידע
+                    </button>
                     
                     <p class="text-brand-cyan text-sm md:text-base font-medium max-w-lg mx-auto bg-brand-dark/50 backdrop-blur-sm py-2 px-5 rounded-full border border-brand-cyan/30 mt-3 shadow-lg">
-                        <i class="fas fa-robot ml-1"></i> שלחו את המייל כפי שהוא, ומערכת אוטומטית תשלח אליכם מיד את כל המידע!
+                        <i class="fas fa-robot ml-1"></i> השאירו פרטים ונציג דיגיטלי ישלח אליכם מידע באופן מיידי!
                     </p>
                 </div>
             </div>
@@ -279,63 +238,6 @@
         </div>
     </section>
 
-    <!-- Features / Benefits Grid -->
-    <section class="py-16 bg-brand-dark text-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-                <div class="p-4 border-r border-gray-700/50 last:border-0 md:border-r">
-                    <div class="text-brand-cyan text-4xl mb-4"><i class="fas fa-lock"></i></div>
-                    <h4 class="font-bold text-2xl mb-2">100% בטיחות</h4>
-                    <p class="text-sm text-gray-400">פרטיות מובטחת. המידע שלך מוגן בסטנדרטים הגבוהים ביותר.</p>
-                </div>
-                <div class="p-4 border-r border-gray-700/50 last:border-0 md:border-r">
-                    <div class="text-brand-cyan text-4xl mb-4"><i class="fas fa-phone-slash"></i></div>
-                    <h4 class="font-bold text-2xl mb-2">בלי אינטרנט</h4>
-                    <p class="text-sm text-gray-400">מותאם לטלפונים כשרים וללא צורך בגישה לרשת כלל.</p>
-                </div>
-                <div class="p-4 border-r border-gray-700/50 last:border-0 md:border-r">
-                    <div class="text-brand-cyan text-4xl mb-4"><i class="fas fa-clock"></i></div>
-                    <h4 class="font-bold text-2xl mb-2">24/7 זמינות</h4>
-                    <p class="text-sm text-gray-400">זמין עבורך בכל זמן, בכל מקום ומכל טלפון שתבחר.</p>
-                </div>
-                <div class="p-4">
-                    <div class="text-brand-cyan text-4xl mb-4"><i class="fas fa-chart-line"></i></div>
-                    <h4 class="font-bold text-2xl mb-2">חיסכון בזמן</h4>
-                    <p class="text-sm text-gray-400">מנהלים מיילים ביעילות, בלי מסכים ובלי טרחה מיותרת.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Target Audience -->
-    <section class="py-16 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-2xl md:text-3xl font-extrabold text-brand-blue mb-10">למי זה מתאים?</h2>
-            <div class="flex flex-wrap justify-center gap-6 md:gap-12">
-                <div class="flex flex-col items-center">
-                    <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-md mb-3 text-brand-dark text-2xl"><i class="fas fa-user"></i></div>
-                    <span class="font-bold text-gray-700">בעלי טלפון כשר</span>
-                </div>
-                <div class="flex flex-col items-center">
-                    <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-md mb-3 text-brand-dark text-2xl"><i class="fas fa-user-tie"></i></div>
-                    <span class="font-bold text-gray-700">אנשי עסקים</span>
-                </div>
-                <div class="flex flex-col items-center">
-                    <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-md mb-3 text-brand-dark text-2xl"><i class="fas fa-clock"></i></div>
-                    <span class="font-bold text-gray-700">עמוסים בזמן</span>
-                </div>
-                <div class="flex flex-col items-center">
-                    <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-md mb-3 text-brand-dark text-2xl"><i class="fas fa-users"></i></div>
-                    <span class="font-bold text-gray-700">אזרחים ותיקים</span>
-                </div>
-                <div class="flex flex-col items-center">
-                    <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-md mb-3 text-brand-dark text-2xl"><i class="fas fa-laptop"></i></div>
-                    <span class="font-bold text-gray-700">כל מי שרוצה פשטות</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- CTA & Footer -->
     <footer class="bg-brand-light pt-10 pb-8 border-t border-blue-100">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -348,16 +250,16 @@
                     חוויית מייל חדשנית, בטוחה, נוחה ועכשיו – גם בקול שלכם.
                 </p>
                 <h3 class="text-2xl md:text-3xl font-extrabold text-brand-dark mb-4">
-                    איך מקבלים פרטים ונרשמים?
+                    מוכנים להתקדם?
                 </h3>
                 <p class="text-lg text-brand-blue mb-8 font-bold">
-                    לוחצים על הכפתור, שולחים אלינו את המייל המוכן מראש, <br>והמידע יישלח אליכם אוטומטית ובאופן מיידי!
+                    השאירו פרטים בטופס הקצר והמידע המלא בדרך אליכם!
                 </p>
                 
-                <!-- קישור לג'ימייל -->
-                <a href="https://mail.google.com/mail/u/0/?view=cm&fs=1&tf=1&source=mailto&to=6161358@gmail.com&su=%D7%9E%D7%A2%D7%95%D7%A0%D7%99%D7%99%D7%9F%20%D7%9C%D7%94%D7%A6%D7%98%D7%A8%D7%A3%20%D7%9C%D7%9E%D7%99%D7%99%D7%9C%20%D7%A4%D7%95%D7%9F" target="_blank" class="inline-flex items-center justify-center px-10 py-4 border border-transparent text-xl font-bold rounded-full text-white bg-brand-blue hover:bg-blue-800 transition duration-300 shadow-xl w-full sm:w-auto pulse-btn mx-auto">
-                    <i class="fas fa-paper-plane ml-3"></i> שלחו מייל לקבלת פרטים
-                </a>
+                <!-- כפתור פתיחת הפופאפ -->
+                <button onclick="openModal()" class="inline-flex items-center justify-center px-10 py-4 border border-transparent text-xl font-bold rounded-full text-white bg-brand-blue hover:bg-blue-800 transition duration-300 shadow-xl w-full sm:w-auto pulse-btn mx-auto cursor-pointer">
+                    <i class="fas fa-edit ml-3"></i> לחצו כאן להשארת פרטים
+                </button>
             </div>
 
             <!-- Footer Details -->
@@ -366,11 +268,9 @@
                     <img src="https://i.postimg.cc/qMDFnMXw/image.png" alt="מייל פון לוגו" class="h-10 w-auto opacity-70 grayscale hover:grayscale-0 transition duration-300">
                 </div>
                 <div class="hidden md:block w-px h-8 bg-gray-400"></div>
-                <!-- קישור לג'ימייל -->
-                <a href="https://mail.google.com/mail/u/0/?view=cm&fs=1&tf=1&source=mailto&to=6161358@gmail.com&su=%D7%9E%D7%A2%D7%95%D7%A0%D7%99%D7%99%D7%9F%20%D7%9C%D7%94%D7%A6%D7%98%D7%A8%D7%A3%20%D7%9C%D7%9E%D7%99%D7%99%D7%9C%20%D7%A4%D7%95%D7%9F" target="_blank" class="flex items-center gap-3 hover:text-brand-blue transition">
-                    <i class="fas fa-envelope text-2xl text-brand-blue"></i>
-                    <span class="font-bold text-2xl text-brand-dark" dir="ltr">6161358@gmail.com</span>
-                </a>
+                <div class="flex items-center gap-3">
+                    <span class="font-bold text-xl text-brand-dark">העוזר האישי שלך למייל</span>
+                </div>
             </div>
             
             <p class="text-gray-500 text-sm mt-8">
@@ -379,8 +279,76 @@
         </div>
     </footer>
 
-    <!-- סקריפט לאפקט הקלדה -->
+    <!-- מודל השארת פרטים (Pop-up) -->
+    <div id="leadModal" class="fixed inset-0 z-[100] hidden items-center justify-center opacity-0 transition-opacity duration-300">
+        <!-- רקע מוכהה -->
+        <div class="absolute inset-0 bg-brand-dark/60 modal-overlay" onclick="closeModal()"></div>
+        
+        <!-- תוכן המודל -->
+        <div class="bg-white rounded-2xl shadow-2xl z-10 w-full max-w-md mx-4 overflow-hidden transform scale-95 transition-transform duration-300" id="modalContent">
+            <!-- אזור כותרת -->
+            <div class="bg-brand-blue p-6 text-white text-center relative">
+                <button onclick="closeModal()" class="absolute top-4 left-4 text-white hover:text-gray-200 focus:outline-none transition-colors">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+                <div class="w-16 h-16 mx-auto bg-white/20 rounded-full flex items-center justify-center mb-3">
+                    <i class="fas fa-paper-plane text-2xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-1">השאירו פרטים</h3>
+                <p class="text-blue-100 text-sm">ונשלח אליכם את כל המידע באופן מיידי</p>
+            </div>
+            
+            <!-- אזור טופס -->
+            <div class="p-6 md:p-8 bg-gray-50">
+                <form id="leadForm" onsubmit="submitForm(event)">
+                    
+                    <div class="mb-4 relative">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="name">שם מלא <span class="text-red-500">*</span></label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-gray-400">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <input class="shadow-sm border border-gray-300 rounded-xl w-full py-3 px-4 pr-10 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-brand-blue focus:border-transparent transition-all" id="name" type="text" placeholder="הכנס שם מלא..." required>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4 relative">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="email">כתובת מייל <span class="text-red-500">*</span></label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-gray-400">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <input class="shadow-sm border border-gray-300 rounded-xl w-full py-3 px-4 pr-10 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-brand-blue focus:border-transparent transition-all" id="email" type="email" placeholder="example@gmail.com" required dir="ltr" style="text-align: right;">
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6 relative">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="phone">מספר טלפון <span class="text-gray-400 font-normal">(אופציונלי)</span></label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-gray-400">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <input class="shadow-sm border border-gray-300 rounded-xl w-full py-3 px-4 pr-10 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-brand-blue focus:border-transparent transition-all" id="phone" type="tel" placeholder="050-0000000" dir="ltr" style="text-align: right;">
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center justify-center">
+                        <button id="submitBtn" class="w-full bg-brand-cyan hover:bg-cyan-600 text-white font-bold py-3.5 px-4 rounded-xl shadow-lg focus:outline-none focus:ring-4 focus:ring-cyan-300 transition duration-300 flex justify-center items-center gap-2 text-lg" type="submit">
+                            <span>שלח פרטים עכשיו</span>
+                            <i class="fas fa-arrow-left"></i>
+                        </button>
+                    </div>
+                    
+                    <!-- הודעת חיווי על שליחה -->
+                    <div id="formMessage" class="hidden mt-4 text-center font-bold text-sm p-3 rounded-lg"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- סקריפט עיקרי של האתר -->
     <script>
+        // אנימציית הקלדה (שיירנו מהגרסה הקודמת)
         const textElement = document.getElementById('typing-text');
         const phrases = [
             "פתרון מהפכני, פשוט, מהיר ובטוח.",
@@ -406,12 +374,12 @@
             let typeSpeed = isDeleting ? 30 : 80;
 
             if (!isDeleting && charIndex === currentPhrase.length) {
-                typeSpeed = 2000; // השהייה בסוף משפט
+                typeSpeed = 2000;
                 isDeleting = true;
             } else if (isDeleting && charIndex === 0) {
                 isDeleting = false;
                 phraseIndex = (phraseIndex + 1) % phrases.length;
-                typeSpeed = 500; // השהייה לפני המשפט הבא
+                typeSpeed = 500;
             }
 
             setTimeout(typeEffect, typeSpeed);
@@ -420,6 +388,111 @@
         document.addEventListener('DOMContentLoaded', () => {
             setTimeout(typeEffect, 1000);
         });
+
+        // ----- ניהול המודל (Pop-up) והטופס ----- //
+        const modal = document.getElementById('leadModal');
+        const modalContent = document.getElementById('modalContent');
+
+        function openModal() {
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            // Timeout קטן בשביל האנימציה (Fade-in + Scale)
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                modalContent.classList.remove('scale-95');
+                modalContent.classList.add('scale-100');
+            }, 10);
+        }
+
+        function closeModal() {
+            // הוספת האנימציה ההפוכה (Fade-out)
+            modal.classList.add('opacity-0');
+            modalContent.classList.remove('scale-100');
+            modalContent.classList.add('scale-95');
+            
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                
+                // איפוס הטופס לקראת הפתיחה הבאה
+                document.getElementById('leadForm').reset();
+                const messageDiv = document.getElementById('formMessage');
+                messageDiv.classList.add('hidden');
+                messageDiv.className = 'hidden mt-4 text-center font-bold text-sm p-3 rounded-lg';
+                
+                const btn = document.getElementById('submitBtn');
+                btn.disabled = false;
+                btn.innerHTML = '<span>שלח פרטים עכשיו</span><i class="fas fa-arrow-left"></i>';
+                btn.classList.remove('opacity-70', 'cursor-not-allowed', 'bg-green-500', 'hover:bg-green-600');
+                btn.classList.add('bg-brand-cyan', 'hover:bg-cyan-600');
+            }, 300); // 300ms זה זמן ה-Transition ב-Tailwind
+        }
+
+        // שליחת הטופס ל-Webhook
+        async function submitForm(event) {
+            event.preventDefault(); // מונע את ריענון הדף
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            
+            const btn = document.getElementById('submitBtn');
+            const messageDiv = document.getElementById('formMessage');
+            
+            // מצב טעינה (Loading)
+            btn.disabled = true;
+            btn.classList.add('opacity-70', 'cursor-not-allowed');
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin text-xl"></i> <span>שולח נתונים...</span>';
+            messageDiv.classList.add('hidden');
+            
+            // ה-Webhook שלך ב-n8n
+            const webhookUrl = 'https://n8n.srv1256019.hstgr.cloud/webhook/d10da407-da0f-4735-8ec5-370a4df1636d';
+            
+            try {
+                // שליחת בקשת POST רגילה עם JSON
+                const response = await fetch(webhookUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        name: name,
+                        email: email,
+                        phone: phone,
+                        source: 'Landing Page Pop-up',
+                        timestamp: new Date().toISOString()
+                    })
+                });
+                
+                if (response.ok || response.status === 200) {
+                    messageDiv.innerHTML = '<i class="fas fa-check-circle ml-1"></i> הפרטים נשלחו בהצלחה! המידע יישלח אליך בהקדם.';
+                    messageDiv.className = 'mt-4 text-center font-bold text-sm p-3 rounded-lg bg-green-100 text-green-700 border border-green-200';
+                    messageDiv.classList.remove('hidden');
+                    
+                    btn.classList.remove('bg-brand-cyan', 'hover:bg-cyan-600');
+                    btn.classList.add('bg-green-500', 'hover:bg-green-600');
+                    btn.innerHTML = '<i class="fas fa-check text-xl"></i> <span>נשלח בהצלחה</span>';
+                    
+                    // סגירת חלון אוטומטית אחרי 3 שניות
+                    setTimeout(() => {
+                        closeModal();
+                    }, 3500);
+                } else {
+                    throw new Error('שגיאה בתגובת השרת');
+                }
+
+            } catch (error) {
+                console.error('Error submitting form:', error);
+                // שגיאה
+                messageDiv.innerHTML = '<i class="fas fa-exclamation-circle ml-1"></i> אירעה שגיאה בשליחה. אנא נסו שוב.';
+                messageDiv.className = 'mt-4 text-center font-bold text-sm p-3 rounded-lg bg-red-100 text-red-700 border border-red-200';
+                messageDiv.classList.remove('hidden');
+                
+                btn.disabled = false;
+                btn.classList.remove('opacity-70', 'cursor-not-allowed');
+                btn.innerHTML = '<span>נסה שוב</span><i class="fas fa-redo"></i>';
+            }
+        }
     </script>
 </body>
 </html>
