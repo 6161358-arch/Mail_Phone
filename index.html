@@ -449,41 +449,36 @@
             const webhookUrl = 'https://n8n.srv1256019.hstgr.cloud/webhook/d10da407-da0f-4735-8ec5-370a4df1636d';
             
             try {
-                // שליחת בקשת POST רגילה עם JSON
-                const response = await fetch(webhookUrl, {
+                // צורת שליחה פשוטה זהה לקוד לדוגמה שסיפקת
+                await fetch(webhookUrl, {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        name: name,
-                        email: email,
-                        phone: phone,
-                        source: 'Landing Page Pop-up',
-                        timestamp: new Date().toISOString()
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        name: name, 
+                        phone: phone, 
+                        email: email, 
+                        source: 'Landing Page Pop-up', 
+                        date: new Date().toISOString() 
                     })
                 });
                 
-                if (response.ok || response.status === 200) {
-                    messageDiv.innerHTML = '<i class="fas fa-check-circle ml-1"></i> הפרטים נשלחו בהצלחה! המידע יישלח אליך בהקדם.';
-                    messageDiv.className = 'mt-4 text-center font-bold text-sm p-3 rounded-lg bg-green-100 text-green-700 border border-green-200';
-                    messageDiv.classList.remove('hidden');
-                    
-                    btn.classList.remove('bg-brand-cyan', 'hover:bg-cyan-600');
-                    btn.classList.add('bg-green-500', 'hover:bg-green-600');
-                    btn.innerHTML = '<i class="fas fa-check text-xl"></i> <span>נשלח בהצלחה</span>';
-                    
-                    // סגירת חלון אוטומטית אחרי 3 שניות
-                    setTimeout(() => {
-                        closeModal();
-                    }, 3500);
-                } else {
-                    throw new Error('שגיאה בתגובת השרת');
-                }
+                messageDiv.innerHTML = '<i class="fas fa-check-circle ml-1"></i> הפרטים נשלחו בהצלחה! המידע בדרך אליכם.';
+                messageDiv.className = 'mt-4 text-center font-bold text-sm p-3 rounded-lg bg-green-100 text-green-700 border border-green-200';
+                messageDiv.classList.remove('hidden');
+                
+                btn.classList.remove('bg-brand-cyan', 'hover:bg-cyan-600');
+                btn.classList.add('bg-green-500', 'hover:bg-green-600');
+                btn.innerHTML = '<i class="fas fa-check text-xl"></i> <span>נשלח בהצלחה</span>';
+                
+                // איפוס טופס וסגירת חלון אוטומטית
+                document.getElementById('leadForm').reset();
+                setTimeout(() => {
+                    closeModal();
+                }, 3000);
 
             } catch (error) {
                 console.error('Error submitting form:', error);
-                // שגיאה
+                
                 messageDiv.innerHTML = '<i class="fas fa-exclamation-circle ml-1"></i> אירעה שגיאה בשליחה. אנא נסו שוב.';
                 messageDiv.className = 'mt-4 text-center font-bold text-sm p-3 rounded-lg bg-red-100 text-red-700 border border-red-200';
                 messageDiv.classList.remove('hidden');
