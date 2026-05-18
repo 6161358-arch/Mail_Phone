@@ -105,7 +105,7 @@
                 <div class="flex-shrink-0 flex items-center gap-3">
                     <img class="h-20 md:h-24 -my-2 w-auto object-contain transition-transform hover:scale-105 duration-300" src="./logo.png" alt="מייל פון לוגו">
                     <div class="hidden sm:flex px-3 py-1 bg-brand-light text-brand-blue text-xs font-bold rounded-full items-center gap-1 border border-blue-200">
-                        <i class="fas fa-check-circle"></i> המייל שלך. בקול שלך.
+                        <i class="fas fa-check-circle"></i> פתרון מהפכני
                     </div>
                 </div>
                 <!-- כפתור הרשמה עליון -->
@@ -336,6 +336,15 @@
                         </div>
                     </div>
                     
+                    <!-- צ'קבוקס אישור דיוור -->
+                    <div class="mb-6 flex items-start gap-2">
+                        <input type="checkbox" id="marketing-consent" required class="mt-1 w-4 h-4 cursor-pointer accent-brand-blue">
+                        <label for="marketing-consent" class="text-xs text-gray-600 cursor-pointer leading-tight">
+                            אני מאשר/ת קבלת עדכונים, טיפים והצעות שיווקיות למייל.
+                            <span class="block text-[10px] text-gray-400 mt-0.5">(ניתן להסיר בכל עת)</span>
+                        </label>
+                    </div>
+                    
                     <div class="flex items-center justify-center">
                         <button id="submitBtn" class="w-full bg-brand-cyan hover:bg-cyan-600 text-white font-bold py-3.5 px-4 rounded-xl shadow-lg focus:outline-none focus:ring-4 focus:ring-cyan-300 transition duration-300 flex justify-center items-center gap-2 text-lg" type="submit">
                             <span>שלח פרטים עכשיו</span>
@@ -439,6 +448,7 @@
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
             const phone = document.getElementById('phone').value;
+            const consent = document.getElementById('marketing-consent').checked;
             
             const btn = document.getElementById('submitBtn');
             const messageDiv = document.getElementById('formMessage');
@@ -461,7 +471,8 @@
                         name: name, 
                         phone: phone, 
                         email: email, 
-                        source: 'Landing Page Pop-up', 
+                        source: 'Landing Page Pop-up',
+                        marketingConsent: consent,
                         date: new Date().toISOString() 
                     })
                 });
