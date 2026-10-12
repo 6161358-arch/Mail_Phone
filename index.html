@@ -3,504 +3,910 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>מייל פון - גישה חכמה למייל שלך דרך שיחת טלפון</title>
-    
-    <!-- Favicon: אייקון אפרכסת על עיגול בגרדיאנט של מייל פון -->
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2300b4d8'/%3E%3Cstop offset='100%25' stop-color='%231a5ebd'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='256' cy='256' r='256' fill='url(%23grad)'/%3E%3Cg transform='translate(128,128) scale(0.5)'%3E%3Cpath d='M164.9 24.6c-7.7-18.6-28-28.5-47.4-23.2l-88 24C12.1 30.2 0 46 0 64C0 311.4 200.6 512 448 512c18 0 33.8-12.1 38.6-29.5l24-88c5.3-19.4-4.6-39.7-23.2-47.4l-96-40c-16.3-6.8-35.2-2.1-46.3 11.6L304.7 368C234.3 334.7 177.3 277.7 144 207.3L193.3 167c13.7-11.2 18.4-30 11.6-46.3l-40-96z' fill='white'/%3E%3C/g%3E%3C/svg%3E">
+    <title>מייל פון - המייל שלכם, במקשי הטלפון</title>
+    <meta name="description" content="מתקשרים, שומעים את המיילים, עונים בקול ושולחים מיילים חדשים. בלי אינטרנט ובלי מסך, מכל טלפון כשר.">
+    <meta property="og:title" content="מייל פון - המייל שלכם, במקשי הטלפון">
+    <meta property="og:description" content="מתקשרים, שומעים את המיילים, עונים בקול ושולחים מיילים חדשים. מכל טלפון כשר.">
+    <meta property="og:image" content="https://6161358-arch.github.io/Mail_Phone/logo.png">
+    <meta property="og:type" content="website">
 
-    <!-- ייבוא פונט Heebo -->
+    <!-- Favicon: אפרכסת על עיגול כחול -->
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Ccircle cx='256' cy='256' r='256' fill='%231667d9'/%3E%3Cg transform='translate(128,128) scale(0.5)'%3E%3Cpath d='M164.9 24.6c-7.7-18.6-28-28.5-47.4-23.2l-88 24C12.1 30.2 0 46 0 64C0 311.4 200.6 512 448 512c18 0 33.8-12.1 38.6-29.5l24-88c5.3-19.4-4.6-39.7-23.2-47.4l-96-40c-16.3-6.8-35.2-2.1-46.3 11.6L304.7 368C234.3 334.7 177.3 277.7 144 207.3L193.3 167c13.7-11.2 18.4-30 11.6-46.3l-40-96z' fill='white'/%3E%3C/g%3E%3C/svg%3E">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
-    
-    <!-- ייבוא Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- הגדרות צבעים תואמות למודעה -->
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            dark: '#0b1d3a',   // כחול-נייבי עמוק
-                            blue: '#1a5ebd',   // כחול רויאל
-                            cyan: '#00b4d8',   // תכלת זוהר
-                            light: '#eef5fc',  // אפור-כחלחל בהיר
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Heebo', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
-
-    <!-- ייבוא אייקונים -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;900&display=swap" rel="stylesheet">
 
     <style>
+        /* ---------- צבעים (לפי הלוגו של מייל פון) וגופן אחד לכל העמוד ---------- */
+        :root {
+            --bg: #071a3d;         /* כחול לילה - הרקע הכהה */
+            --fg: #edf3ff;         /* טקסט על רקע כהה */
+            --accent: #4f9dff;     /* הכחול של המעטפה, מואר */
+            --pale: #dbe8fb;       /* תכלת - הרקע הבהיר */
+            --paper: #f3f7fd;      /* רקע בהיר שני */
+            --ink: #0a1f44;        /* טקסט על רקע בהיר */
+            --muted: #a9bcdc;      /* טקסט משני על כהה */
+            --muted-ink: #4c5d7a;  /* טקסט משני על בהיר */
+            --line: #ffffff2e;
+            --line-ink: #0a1f4430;
+            --amber: #ffb000;      /* מקש דולק - הצבע החם היחיד בעמוד */
+        }
+
+        *, *::before, *::after { box-sizing: border-box; }
         html { scroll-behavior: smooth; }
-        
-        .ai-gradient-text {
-            background: linear-gradient(to left, #1a5ebd, #00b4d8, #1a5ebd);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-size: 200% auto;
-            animation: shine 4s linear infinite;
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--fg);
+            font: 400 18px/1.5 'Rubik', 'Arial Hebrew', Arial, sans-serif;
+            overflow-x: clip;
+            -webkit-font-smoothing: antialiased;
+        }
+        h1, h2, h3, p { margin: 0; }
+        h1, h2 { font-weight: 900; letter-spacing: -0.03em; line-height: 1.02; }
+        a, button { color: inherit; font: inherit; }
+        a { text-decoration: none; }
+        button { background: none; border: 0; cursor: pointer; }
+        :focus-visible { outline: 2px solid var(--amber); outline-offset: 4px; }
+        [hidden] { display: none !important; }
+        .blue { color: var(--accent); }
+
+        /* גרעיניות עדינה על כל העמוד, קו התקדמות בצד, וסמן עגול */
+        .grain {
+            position: fixed; inset: 0; pointer-events: none; z-index: 40; opacity: .05;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%23fff' filter='url(%23n)' d='M0 0h180v180H0z'/%3E%3C/svg%3E");
+        }
+        .progress { position: fixed; right: 0; top: 0; height: 100vh; width: 3px; background: var(--accent); transform-origin: top; transform: scaleY(0); z-index: 45; }
+        #cursor {
+            position: fixed; left: 0; top: 0; width: 32px; height: 32px;
+            border: 1.5px solid var(--cursor-ink, #9cc6ff); border-radius: 50%;
+            z-index: 60; pointer-events: none; opacity: 0;
+            display: grid; place-items: center;
+            color: var(--cursor-inverse, #071a3d);
+            transition: width .2s, height .2s, background .2s, border-color .12s;
+        }
+        #cursor::after { content: ''; width: 4px; height: 4px; border-radius: 50%; background: var(--cursor-ink, #9cc6ff); }
+        #cursor span { font-size: 13px; font-weight: 700; }
+        #cursor.active { width: 68px; height: 68px; background: var(--cursor-ink, #9cc6ff); }
+        #cursor.active::after { display: none; }
+        @media (pointer: fine) { .has-cursor, .has-cursor a, .has-cursor button, .has-cursor label { cursor: none; } }
+
+        /* פס עליון של כל חלק: שם החלק מימין, משפט קצר משמאל */
+        .section-top {
+            display: flex; justify-content: space-between; gap: 20px;
+            border-top: 1px solid currentColor; padding-top: 16px;
+            font-size: 14px; font-weight: 500;
+        }
+        .eyebrow { font-size: 16px; font-weight: 700; color: var(--accent); margin-bottom: 14px; }
+        .round-link { display: inline-flex; align-items: center; gap: 16px; font-size: 17px; font-weight: 700; }
+        .round-link b {
+            font: 400 24px Arial; width: 44px; height: 44px;
+            border: 1px solid var(--line); border-radius: 50%;
+            display: grid; place-items: center; transition: .3s;
+        }
+        .round-link:hover b { background: var(--accent); color: var(--bg); transform: rotate(-35deg); }
+
+        /* ---------- כותרת עליונה ---------- */
+        .header {
+            position: absolute; top: 0; right: 0; left: 0; z-index: 15;
+            padding: 22px 6% 0;
+            display: flex; justify-content: space-between; align-items: flex-start;
+        }
+        .brand { display: flex; flex-direction: column; align-items: center; line-height: 1; }
+        .brand strong { font-size: 38px; font-weight: 900; letter-spacing: -0.035em; }
+        .brand strong i { font-style: normal; color: var(--accent); }
+        .brand small { font-size: 11px; font-weight: 500; letter-spacing: .08em; margin-top: 7px; color: var(--muted); }
+        .header-link { font-size: 16px; font-weight: 700; padding: 10px 0 6px; border-bottom: 1px solid var(--line); }
+
+        /* ---------- פתיחה: כותרת ענקית, והלוגו בנוי מנקודות ---------- */
+        .hero {
+            min-height: 690px; height: 100svh; max-height: 1050px;
+            position: relative; isolation: isolate; overflow: hidden;
+            padding: 110px 6% 70px;
+            display: grid; grid-template-columns: 1fr 1fr; align-items: center;
+        }
+        .hero canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+        .hero-copy { position: relative; z-index: 2; max-width: 650px; pointer-events: none; }
+        .hero-copy a { pointer-events: auto; }
+        .hero h1 { font-size: clamp(64px, 7vw, 112px); line-height: .92; }
+        .hero h1 span { display: block; white-space: nowrap; }
+        .intro { font-size: clamp(21px, 1.85vw, 28px); font-weight: 500; line-height: 1.32; margin-top: 28px; color: #cfdcf3; }
+        .hero .round-link { margin-top: 28px; }
+        .scatter-target { position: absolute; left: 5%; top: 19%; width: 43%; height: 65%; z-index: 3; border-radius: 40%; touch-action: pan-y; }
+        .particle-hint { position: absolute; left: 9%; bottom: 85px; font-size: 14px; font-weight: 500; color: var(--muted); z-index: 4; pointer-events: none; }
+        .hero-foot {
+            position: absolute; right: 6%; left: 6%; bottom: 22px; z-index: 4;
+            display: flex; justify-content: space-between; align-items: center; gap: 22px;
+            border-top: 1px solid var(--line); padding-top: 15px;
+            color: var(--muted); font-size: 13px; font-weight: 500;
+        }
+        .hero-foot a { color: var(--fg); }
+
+        /* ---------- הרעיון: משפט גדול שנדלק מילה אחרי מילה בגלילה ---------- */
+        .story { background: var(--pale); color: var(--ink); padding: 56px 7% 72px; }
+        .story-grid { display: grid; grid-template-columns: 23% 1fr; gap: 4%; align-items: start; padding: 76px 0 55px; }
+        .side-note { font-size: 20px; font-weight: 500; line-height: 1.4; padding-top: 7px; }
+        .reading { font-size: clamp(40px, 4.75vw, 73px); line-height: 1.1; }
+        .reading em { font-style: normal; color: #1667d9; }
+        .word { opacity: .2; transition: opacity .3s; }
+        .word.lit { opacity: 1; }
+        .story-bottom { display: flex; justify-content: space-between; align-items: center; gap: 24px; font-size: 20px; font-weight: 500; line-height: 1.35; }
+        .asterisk { font: 85px/1 Georgia, serif; color: #1667d9; }
+
+        /* ---------- השיחה: הטלפון נשאר במקום, והגלילה מעבירה בין השלבים ---------- */
+        .call { height: 320vh; background: var(--paper); color: var(--ink); }
+        .sticky {
+            position: sticky; top: 0; height: 100svh; min-height: 660px; overflow: hidden;
+            padding: 30px 7% 26px;
+            display: grid; grid-template-columns: 1fr 340px; grid-template-rows: auto 1fr auto; gap: 0 7%;
+            background: radial-gradient(ellipse 46% 60% at 22% 52%, #ffffff 0%, var(--paper) 70%);
+        }
+        .sticky .section-top { grid-column: 1 / -1; }
+        .call-copy { align-self: center; max-width: 560px; }
+        .call-copy .eyebrow { color: #1667d9; }
+        .call h2 { font-size: clamp(44px, 4.9vw, 78px); line-height: 1.04; }
+        .call-copy > p:last-child { font-size: 21px; font-weight: 500; line-height: 1.42; margin-top: 22px; color: var(--muted-ink); max-width: 26em; }
+        .call-copy.swap > * { animation: swap .45s ease-out both; }
+        .call-copy.swap > *:nth-child(2) { animation-delay: .06s; }
+        .call-copy.swap > *:nth-child(3) { animation-delay: .12s; }
+        @keyframes swap { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+        .phone-col { align-self: center; }
+        .track { grid-column: 1 / -1; display: flex; align-items: center; gap: 16px; }
+        .track button { padding: 7px 16px; border: 1px solid transparent; border-radius: 50px; font-size: 17px; font-weight: 700; }
+        .track button:hover, .track button[aria-pressed=true] { border-color: #0a1f4455; background: #fff; }
+        .track i { flex: 1; height: 1px; background: var(--line-ink); direction: ltr; }
+        .track i b { display: block; height: 100%; width: 0; background: var(--ink); }
+
+        /* הטלפון */
+        .phone {
+            background: var(--ink); color: #fff;
+            border-radius: 40px; padding: 20px 20px 24px;
+            box-shadow: 0 34px 60px -28px rgba(10, 31, 68, .6), inset 0 0 0 2px rgba(255,255,255,.07);
+        }
+        .phone-speaker { width: 64px; height: 6px; border-radius: 3px; background: rgba(255,255,255,.18); margin: 0 auto 14px; }
+        .screen {
+            background: #e6effb; color: var(--ink);
+            border-radius: 16px; padding: 14px 16px 14px;
+            height: 208px; overflow: hidden;
+            display: flex; flex-direction: column;
+        }
+        .screen-head {
+            display: flex; align-items: center; justify-content: space-between;
+            font-size: 13px; font-weight: 700; color: #1667d9;
+            padding-bottom: 8px; margin-bottom: 10px; border-bottom: 1px solid #c4d5ef;
+        }
+        .bars { display: inline-flex; gap: 3px; align-items: flex-end; height: 14px; }
+        .bars i { width: 3px; height: 4px; background: #1667d9; border-radius: 2px; }
+        .talking .bars i { animation: bar .7s ease-in-out infinite; }
+        .talking .bars i:nth-child(2) { animation-delay: .15s; }
+        .talking .bars i:nth-child(3) { animation-delay: .3s; }
+        .talking .bars i:nth-child(4) { animation-delay: .45s; }
+        @keyframes bar { 0%, 100% { height: 4px; } 50% { height: 14px; } }
+        .heard { font-size: 16.5px; line-height: 1.45; font-weight: 500; flex: 1; }
+        .heard.swap { animation: swap .25s ease-out; }
+        .prompt { font-size: 13px; color: var(--muted-ink); margin-top: 8px; }
+        .keys { direction: ltr; display: grid; grid-template-columns: repeat(3, 1fr); gap: 9px; margin-top: 16px; }
+        .key {
+            color: #fff; background: #17336a;
+            border-radius: 14px; height: 60px;
+            display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+            box-shadow: 0 3px 0 #061430;
+            transition: transform .08s, box-shadow .08s, background .15s;
+        }
+        .key b { font-size: 23px; font-weight: 700; line-height: 1; }
+        .key small { font-size: 11.5px; font-weight: 500; color: #a9c3ee; direction: rtl; line-height: 1.1; transition: opacity .2s; }
+        .keys.plain .key small { opacity: 0; }
+        .key:hover { background: #1d3f80; }
+        .key.idle { background: #102650; }
+        .key.idle b { color: #6f86b3; }
+        .key.lit, .key:active {
+            background: var(--amber); transform: translateY(3px);
+            box-shadow: 0 0 0 #061430, 0 0 24px rgba(255, 176, 0, .6);
+        }
+        .key.lit b, .key.lit small, .key:active b, .key:active small { color: var(--ink); }
+        .phone-note { text-align: center; font-size: 13px; color: var(--muted-ink); margin-top: 12px; }
+        @media (max-height: 760px) and (min-width: 861px) {
+            .key { height: 50px; } .screen { height: 186px; } .phone-note { display: none; }
         }
 
-        @keyframes shine {
-            to { background-position: 200% center; }
-        }
+        /* ---------- הפרטים ---------- */
+        .facts { padding: 56px 7% 84px; }
+        .facts-head { display: grid; grid-template-columns: 1fr 1fr; gap: 7%; align-items: end; padding: 60px 0 36px; }
+        .facts h2 { font-size: clamp(52px, 5.5vw, 86px); }
+        .facts-head p { font-size: clamp(19px, 1.6vw, 23px); line-height: 1.42; color: var(--muted); }
+        .facts-list { display: grid; grid-template-columns: 1fr 1fr; gap: 0 7%; }
+        .fact { padding: 26px 0; border-top: 1px solid var(--line); }
+        .fact h3 { font-size: 24px; font-weight: 700; margin-bottom: 6px; }
+        .fact p { color: var(--muted); }
 
-        .hero-bg {
-            background: radial-gradient(circle at top right, #11366b 0%, #0b1d3a 100%);
-            position: relative;
-            overflow: hidden;
+        /* ---------- מסלול הדיבור (AI) ---------- */
+        .talk { background: var(--pale); color: var(--ink); padding: 56px 7% 84px; }
+        .talk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 7%; align-items: center; padding-top: 60px; }
+        .talk .eyebrow { color: #1667d9; }
+        .talk h2 { font-size: clamp(52px, 5.5vw, 86px); }
+        .talk h2 span { color: #1667d9; }
+        .talk .description { font-size: clamp(19px, 1.6vw, 23px); line-height: 1.42; color: var(--muted-ink); margin-top: 24px; max-width: 26em; }
+        .bubbles { display: flex; flex-direction: column; gap: 14px; align-items: flex-start; }
+        .bubble {
+            font-weight: 500; font-size: clamp(19px, 1.7vw, 24px);
+            background: #fff; border-radius: 22px 22px 22px 5px; padding: 14px 24px;
+            box-shadow: 0 14px 26px -18px rgba(10, 31, 68, .5);
         }
-        .hero-bg::before {
-            content: '';
-            position: absolute;
-            top: 0; right: 0; bottom: 0; left: 0;
-            background-image: 
-                linear-gradient(rgba(0, 180, 216, 0.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 180, 216, 0.05) 1px, transparent 1px);
-            background-size: 30px 30px;
-            opacity: 0.8;
-        }
+        .bubble:nth-child(even) { align-self: flex-end; border-radius: 22px 22px 5px 22px; background: var(--ink); color: #fff; }
 
-        .pulse-btn {
-            box-shadow: 0 0 0 0 rgba(26, 94, 189, 0.7);
-            animation: pulse 2s infinite;
+        /* ---------- סיום: השארת פרטים ---------- */
+        .finish { padding: 76px 7% 0; }
+        .finish-grid { display: grid; grid-template-columns: 1fr 440px; gap: 7%; align-items: start; }
+        .finish h2 { font-size: clamp(56px, 6.4vw, 100px); line-height: .98; }
+        .finish .description { font-size: clamp(19px, 1.6vw, 23px); line-height: 1.42; color: var(--muted); margin-top: 26px; }
+        .contact-line { margin-top: 30px; font-size: 20px; font-weight: 500; }
+        .contact-line a { font-weight: 900; color: var(--accent); }
+        .form-card { border: 1px solid var(--line); border-radius: 24px; padding: 28px; background: #ffffff0a; }
+        .field { margin-bottom: 16px; }
+        .field label { display: block; font-weight: 700; font-size: 16px; margin-bottom: 6px; }
+        .field label span { font-weight: 400; color: var(--muted); }
+        .field input, .field select {
+            width: 100%; font: 400 17px 'Rubik', Arial, sans-serif; color: var(--fg);
+            background: #ffffff12; border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px;
         }
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(26, 94, 189, 0.7); }
-            70% { box-shadow: 0 0 0 15px rgba(26, 94, 189, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(26, 94, 189, 0); }
+        .field select option { color: var(--ink); }
+        .field input::placeholder { color: #8fa5c9; }
+        .field input:focus, .field select:focus { outline: none; border-color: var(--accent); background: #ffffff1c; }
+        .field input[dir="ltr"] { text-align: right; }
+        .consent { display: flex; gap: 10px; align-items: flex-start; font-size: 15px; color: var(--muted); margin: 4px 0 20px; }
+        .consent input { width: 18px; height: 18px; margin-top: 3px; accent-color: var(--accent); flex: none; }
+        .send {
+            width: 100%; padding: 15px 20px; border-radius: 14px;
+            background: var(--accent); color: var(--bg);
+            font-size: 19px; font-weight: 900; transition: background .2s, transform .2s;
         }
+        .send:hover { background: #7ab5ff; transform: translateY(-2px); }
+        .send[disabled] { opacity: .65; transform: none; }
+        .form-msg { margin-top: 14px; padding: 12px 14px; border-radius: 12px; font-weight: 700; font-size: 16px; }
+        .form-msg.ok { background: #1f6b45; color: #e6fff2; }
+        .form-msg.err { background: #8f2a22; color: #fff0ee; }
+        .finish footer {
+            margin-top: 80px; border-top: 1px solid var(--line); padding: 22px 0 26px;
+            display: flex; align-items: center; justify-content: space-between; gap: 16px 28px; flex-wrap: wrap;
+            color: var(--muted); font-size: 14px;
+        }
+        .finish footer .brand strong { font-size: 32px; color: var(--fg); }
+        .finish footer a { color: var(--fg); font-weight: 700; border-bottom: 1px solid var(--line); }
 
-        .typing-cursor::after {
-            content: '|';
-            animation: blink 1s step-end infinite;
-        }
-        @keyframes blink {
-            50% { opacity: 0; }
-        }
+        /* כניסה בגלילה */
+        .js .reveal { opacity: 0; transform: translateY(24px); transition: opacity .8s, transform .8s; transition-delay: var(--d, 0s); }
+        .js .reveal.visible { opacity: 1; transform: none; }
 
-        /* סגנון לטופס הפופאפ */
-        .modal-overlay {
-            backdrop-filter: blur(5px);
+        /* ---------- מסכים קטנים ---------- */
+        @media (max-width: 860px) {
+            .header { padding-top: 16px; }
+            .brand strong { font-size: 32px; } .brand small { font-size: 9px; margin-top: 5px; }
+            .header-link { font-size: 14px; }
+            .hero { height: auto; min-height: 850px; max-height: none; display: block; padding: 120px 7% 65px; }
+            .hero h1 { font-size: clamp(50px, 12.5vw, 76px); }
+            .intro { font-size: clamp(19px, 5.2vw, 24px); margin-top: 18px; }
+            .hero .round-link { margin-top: 20px; }
+            .scatter-target { left: 5%; top: 50%; width: 90%; height: 36%; }
+            .particle-hint { left: 7%; bottom: 66px; font-size: 13px; }
+            .hero-foot { font-size: 12px; bottom: 14px; }
+            .hero-foot span:first-child { display: none; }
+            .section-top { font-size: 13px; }
+            .story { padding: 38px 7% 55px; }
+            .story-grid { display: block; padding: 36px 0 32px; }
+            .side-note { font-size: 17px; margin-bottom: 24px; }
+            .reading { font-size: clamp(32px, 8.4vw, 48px); }
+            .story-bottom { font-size: 16px; }
+            .asterisk { font-size: 64px; }
+            /* בטלפון אין "נעיצה": הטלפון רץ לבד ועובר בין השלבים */
+            .call { height: auto; }
+            .sticky { position: static; height: auto; min-height: 0; display: block; padding: 38px 7% 56px; background: var(--paper); }
+            .call-copy { padding-top: 34px; min-height: 300px; }
+            .call h2 { font-size: clamp(40px, 10.5vw, 60px); }
+            .call-copy > p:last-child { font-size: 18px; margin-top: 14px; }
+            .track { gap: 6px; margin: 18px 0 26px; }
+            .track button { font-size: 15px; padding: 7px 12px; }
+            .phone-col { max-width: 340px; margin: 0 auto; }
+            .facts, .talk { padding: 38px 7% 60px; }
+            .facts-head, .talk-grid, .finish-grid { grid-template-columns: 1fr; gap: 26px; }
+            .facts-head { padding: 36px 0 26px; }
+            .talk-grid { padding-top: 36px; gap: 36px; }
+            .facts h2, .talk h2 { font-size: clamp(44px, 10.8vw, 64px); }
+            .facts-list { grid-template-columns: 1fr; }
+            .finish { padding: 56px 7% 0; }
+            .finish h2 { font-size: clamp(44px, 10.5vw, 67px); }
+            .form-card { padding: 22px 18px; }
+            .finish footer { margin-top: 56px; font-size: 13px; }
+            #cursor { display: none; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after { animation: none !important; transition: none !important; }
+            .js .reveal { opacity: 1; transform: none; }
         }
     </style>
 </head>
-<body class="font-sans text-gray-800 antialiased bg-gray-50">
+<body>
+    <div id="cursor" aria-hidden="true"><span></span></div>
+    <div class="grain"></div>
+    <div class="progress"></div>
 
-    <!-- Header / Nav -->
-    <header class="bg-white shadow-sm sticky top-0 z-50 border-b border-blue-100">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20">
-                <!-- לוגו - קורא ללוגו המקומי -->
-                <div class="flex-shrink-0 flex items-center gap-3">
-                    <img class="h-20 md:h-24 -my-2 w-auto object-contain transition-transform hover:scale-105 duration-300" src="./logo.png" alt="מייל פון לוגו">
-                    <div class="hidden sm:flex px-3 py-1 bg-brand-light text-brand-blue text-xs font-bold rounded-full items-center gap-1 border border-blue-200">
-                        <i class="fas fa-check-circle"></i> פתרון מהפכני
-                    </div>
-                </div>
-                <!-- כפתור הרשמה עליון -->
-                <div>
-                    <button onclick="openModal()" class="inline-flex items-center justify-center px-6 py-2.5 border border-transparent text-sm font-bold rounded-full text-white bg-brand-blue hover:bg-blue-800 transition duration-300 shadow-lg pulse-btn cursor-pointer">
-                        <i class="fas fa-edit ml-2"></i> השארת פרטים
-                    </button>
-                </div>
-            </div>
-        </div>
+    <header class="header">
+        <a href="#home" class="brand"><strong>מייל <i>פון</i></strong><small>המייל שלך, בקול שלך</small></a>
+        <a class="header-link" href="#details" data-cursor="פרטים">השארת פרטים</a>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero-bg text-white py-20 md:py-28 relative">
-        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-cyan rounded-full blur-[150px] opacity-20 pointer-events-none"></div>
-
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="text-center md:max-w-4xl md:mx-auto">
-                <div class="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-white/10 border border-white/20 text-brand-cyan text-sm font-semibold tracking-wide mb-6 backdrop-blur-sm">
-                    מיוחד לבעלי טלפון כשר
-                </div>
-                <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-4 leading-tight">
-                    גישה חכמה למייל שלך<br>
-                    דרך <span class="ai-gradient-text">שיחת טלפון</span>
-                </h1>
-                
-                <div class="mt-6 h-10 text-xl md:text-2xl text-gray-300 font-light mb-10">
-                    <span id="typing-text" class="typing-cursor font-medium text-white"></span>
-                </div>
-                
-                <div class="flex flex-col items-center justify-center gap-4 mt-8">
-                    <button onclick="openModal()" class="inline-flex items-center justify-center px-8 py-4 border border-transparent text-xl font-bold rounded-full text-white bg-brand-blue hover:bg-blue-800 hover:scale-105 transition duration-300 shadow-[0_0_30px_rgba(26,94,189,0.5)] w-full sm:w-auto relative z-10 cursor-pointer">
-                        <i class="fas fa-paper-plane ml-3 text-2xl"></i> השאירו פרטים לקבלת מידע
-                    </button>
-                    
-                    <p class="text-brand-cyan text-sm md:text-base font-medium max-w-lg mx-auto bg-brand-dark/50 backdrop-blur-sm py-2 px-5 rounded-full border border-brand-cyan/30 mt-3 shadow-lg">
-                        <i class="fas fa-robot ml-1"></i> השאירו פרטים ונציג דיגיטלי ישלח אליכם מידע באופן מיידי!
-                    </p>
-                </div>
+    <main>
+        <!-- פתיחה: הלוגו בנוי מנקודות. נוגעים בו - והן מתפזרות וחוזרות -->
+        <section class="hero" id="home" data-tone="dark">
+            <canvas id="logo" role="img" aria-label="הלוגו של מייל פון: שפופרת טלפון ומעטפה, בנויים מנקודות"></canvas>
+            <div class="hero-copy">
+                <h1><span>המייל שלכם.</span><span class="blue">במקשי הטלפון.</span></h1>
+                <p class="intro">מתקשרים, שומעים, עונים בקול.<br>בלי אינטרנט ובלי מסך.</p>
+                <a class="round-link" href="#story" data-cursor="המשך">לראות איך זה עובד <b>↙</b></a>
             </div>
-        </div>
-        
-        <div class="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-gray-50 to-transparent"></div>
-    </section>
-
-    <!-- The AI Advantage Section -->
-    <section class="py-16 bg-gray-50 -mt-8 relative z-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-extrabold text-brand-dark mb-4">פשוט מדברים – והמערכת מבצעת</h2>
-                <p class="text-gray-600 text-lg">בלי אפליקציות, בלי מסכים, בלי אינטרנט.</p>
+            <button id="scatter-logo" class="scatter-target" aria-label="פיזור הנקודות של הלוגו" data-cursor="פזרו"></button>
+            <p class="particle-hint">געו בנקודות</p>
+            <div class="hero-foot">
+                <span>מייל פון · לבעלי טלפון כשר</span>
+                <a href="#story">גללו לאט ↓</a>
+                <span>מבית פשוט. אוטומט.</span>
             </div>
+        </section>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                
-                <div class="bg-white rounded-2xl p-8 shadow-xl border border-gray-100 hover:shadow-2xl transition duration-300 relative overflow-hidden group">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-brand-light rounded-full mix-blend-multiply filter blur-2xl opacity-50 group-hover:bg-blue-100 transition-all"></div>
-                    <div class="w-14 h-14 bg-brand-light text-brand-blue rounded-xl flex items-center justify-center mb-6 text-2xl shadow-sm border border-blue-100 relative z-10">
-                        <i class="fas fa-headphones"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-brand-dark mb-3 relative z-10">שומעים את המיילים</h3>
-                    <p class="text-gray-600 relative z-10">המערכת קוראת עבורך את כל המיילים הנכנסים בצורה קולחת וטבעית ישר לאוזן.</p>
-                </div>
-
-                <div class="bg-white rounded-2xl p-8 shadow-xl border border-gray-100 hover:shadow-2xl transition duration-300 relative overflow-hidden group md:transform md:-translate-y-4">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-brand-light rounded-full mix-blend-multiply filter blur-2xl opacity-50 group-hover:bg-blue-100 transition-all"></div>
-                    <div class="w-14 h-14 bg-brand-light text-brand-blue rounded-xl flex items-center justify-center mb-6 text-2xl shadow-sm border border-blue-100 relative z-10">
-                        <i class="fas fa-question-circle"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-brand-dark mb-3 relative z-10">שואלים שאלות</h3>
-                    <p class="text-gray-600 relative z-10">"קרא לי את המייל האחרון", "סכם לי את המיילים מהיום" - שאל, והמערכת תענה מיד.</p>
-                </div>
-
-                <div class="bg-white rounded-2xl p-8 shadow-xl border border-gray-100 hover:shadow-2xl transition duration-300 relative overflow-hidden group">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-brand-light rounded-full mix-blend-multiply filter blur-2xl opacity-50 group-hover:bg-blue-100 transition-all"></div>
-                    <div class="w-14 h-14 bg-brand-light text-brand-blue rounded-xl flex items-center justify-center mb-6 text-2xl shadow-sm border border-blue-100 relative z-10">
-                        <i class="fas fa-paper-plane"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-brand-dark mb-3 relative z-10">נותנים הוראה וה-AI מבצע</h3>
-                    <p class="text-gray-600 relative z-10">הכתב למערכת את התשובה שלך, והבינה המלאכותית תנסח ותשלח באופן מיידי.</p>
-                </div>
-
+        <section class="story" id="story" data-tone="light">
+            <div class="section-top"><span>הרעיון</span><span>בין הטלפון לתיבת המייל</span></div>
+            <div class="story-grid">
+                <p class="side-note">המייל מחכה<br>במחשב.<br>אתם לא תמיד לידו.</p>
+                <h2 class="reading">מייל חדש נכנס.<br>הטלפון כבר יודע.<br>מתקשרים, ושומעים אותו.<br><em>עונים בקול,<br>והתשובה נשלחת.</em></h2>
             </div>
-        </div>
-    </section>
-
-    <!-- Voice Commands Section -->
-    <section class="py-20 bg-white overflow-hidden border-t border-gray-100">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="lg:grid lg:grid-cols-2 lg:gap-16 items-center">
-                
-                <div class="mb-12 lg:mb-0 text-center lg:text-right">
-                    <h2 class="text-3xl md:text-4xl font-extrabold text-brand-dark mb-6">מייל פון מאפשר לכם לנהל את המיילים שלכם בקלות</h2>
-                    <p class="text-lg text-gray-600 mb-8 leading-relaxed">באמצעות שיחת טלפון בלבד – בלי אינטרנט, בלי אפליקציות, בלי מסכים. פשוט מדברים – והמערכת מבצעת.</p>
-                    
-                    <ul class="space-y-4 mb-8 text-right text-gray-700">
-                        <li class="flex items-center gap-3"><i class="fas fa-check-circle text-brand-blue"></i> מבין עברית שוטפת וטבעית</li>
-                        <li class="flex items-center gap-3"><i class="fas fa-check-circle text-brand-blue"></i> ניסוח מיילים מקצועי ואוטומטי</li>
-                        <li class="flex items-center gap-3"><i class="fas fa-check-circle text-brand-blue"></i> סיכום חכם של אשכולות ארוכים</li>
-                    </ul>
-                </div>
-
-                <div class="bg-brand-light rounded-2xl p-6 sm:p-10 shadow-lg border-2 border-brand-blue relative">
-                    <div class="absolute -top-5 right-6 bg-brand-blue text-white font-bold px-6 py-2 rounded-md shadow-md text-lg">
-                        דוגמאות למה שאפשר לעשות:
-                    </div>
-                    
-                    <div class="space-y-4 mt-6">
-                        <div class="flex items-center gap-3 bg-white p-3 rounded-lg shadow-sm">
-                            <i class="fas fa-comment-dots text-brand-blue text-xl"></i>
-                            <span class="text-brand-dark font-medium font-bold text-lg">"יש לי מיילים חדשים?"</span>
-                        </div>
-                        <div class="flex items-center gap-3 bg-white p-3 rounded-lg shadow-sm">
-                            <i class="fas fa-comment-dots text-brand-blue text-xl"></i>
-                            <span class="text-brand-dark font-medium font-bold text-lg">"קרא לי את המייל האחרון"</span>
-                        </div>
-                        <div class="flex items-center gap-3 bg-white p-3 rounded-lg shadow-sm">
-                            <i class="fas fa-comment-dots text-brand-blue text-xl"></i>
-                            <span class="text-brand-dark font-medium font-bold text-lg">"סכם לי את המיילים מהיום"</span>
-                        </div>
-                        <div class="flex items-center gap-3 bg-white p-3 rounded-lg shadow-sm">
-                            <i class="fas fa-comment-dots text-brand-blue text-xl"></i>
-                            <span class="text-brand-dark font-medium font-bold text-lg">"שלח מייל לפלוני ש..."</span>
-                        </div>
-                        <div class="flex items-center gap-3 bg-white p-3 rounded-lg shadow-sm">
-                            <i class="fas fa-comment-dots text-brand-blue text-xl"></i>
-                            <span class="text-brand-dark font-medium font-bold text-lg">"ענה למייל הזה כך וכך"</span>
-                        </div>
-                    </div>
-                </div>
-
+            <div class="story-bottom">
+                <span class="asterisk" aria-hidden="true">✳</span>
+                <p>מכל טלפון כשר.<br>בלי אפליקציה. בלי אינטרנט. בלי מסך.</p>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- CTA & Footer -->
-    <footer class="bg-brand-light pt-10 pb-8 border-t border-blue-100">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div class="bg-white rounded-[1rem] p-8 md:p-12 shadow-lg border-2 border-brand-blue mb-12 relative overflow-hidden">
-                <div class="absolute top-0 left-0 right-0 bg-brand-blue text-white py-2 font-bold text-xl">
-                    הצטרפו עוד היום!
+        <!-- השיחה: גוללים, והטלפון מדגים שלב אחרי שלב -->
+        <section class="call" id="call" data-tone="light">
+            <div class="sticky">
+                <div class="section-top"><span>השיחה</span><span>הקישו על המקשים בעצמכם</span></div>
+                <div class="call-copy" id="call-copy">
+                    <p class="eyebrow" id="phase-number"></p>
+                    <h2 id="phase-title"></h2>
+                    <p id="phase-copy"></p>
                 </div>
-                
-                <p class="text-xl text-gray-700 mb-6 mt-10 font-medium">
-                    חוויית מייל חדשנית, בטוחה, נוחה ועכשיו – גם בקול שלכם.
-                </p>
-                <h3 class="text-2xl md:text-3xl font-extrabold text-brand-dark mb-4">
-                    מוכנים להתקדם?
-                </h3>
-                <p class="text-lg text-brand-blue mb-8 font-bold">
-                    השאירו פרטים בטופס הקצר והמידע המלא בדרך אליכם!
-                </p>
-                
-                <!-- כפתור פתיחת הפופאפ -->
-                <button onclick="openModal()" class="inline-flex items-center justify-center px-10 py-4 border border-transparent text-xl font-bold rounded-full text-white bg-brand-blue hover:bg-blue-800 transition duration-300 shadow-xl w-full sm:w-auto pulse-btn mx-auto cursor-pointer">
-                    <i class="fas fa-edit ml-3"></i> לחצו כאן להשארת פרטים
-                </button>
-            </div>
-
-            <!-- Footer Details -->
-            <div class="flex flex-col md:flex-row justify-center items-center gap-8 mb-8 text-brand-dark">
-                <!-- קורא ללוגו המקומי -->
-                <div class="flex items-center gap-3">
-                    <img src="./logo.png" alt="מייל פון לוגו" class="h-10 w-auto opacity-70 grayscale hover:grayscale-0 transition duration-300">
-                </div>
-                <div class="hidden md:block w-px h-8 bg-gray-400"></div>
-                <div class="flex items-center gap-3">
-                    <span class="font-bold text-xl text-brand-dark">העוזר האישי שלך למייל</span>
-                </div>
-            </div>
-            
-            <p class="text-gray-500 text-sm mt-8">
-                &copy; 2026 מייל פון - המייל שלך, בקול שלך. כל הזכויות שמורות.
-            </p>
-        </div>
-    </footer>
-
-    <!-- מודל השארת פרטים (Pop-up) -->
-    <div id="leadModal" class="fixed inset-0 z-[100] hidden items-center justify-center opacity-0 transition-opacity duration-300">
-        <!-- רקע מוכהה -->
-        <div class="absolute inset-0 bg-brand-dark/60 modal-overlay" onclick="closeModal()"></div>
-        
-        <!-- תוכן המודל -->
-        <div class="bg-white rounded-2xl shadow-2xl z-10 w-full max-w-md mx-4 overflow-hidden transform scale-95 transition-transform duration-300" id="modalContent">
-            <!-- אזור כותרת -->
-            <div class="bg-brand-blue p-6 text-white text-center relative">
-                <button onclick="closeModal()" class="absolute top-4 left-4 text-white hover:text-gray-200 focus:outline-none transition-colors">
-                    <i class="fas fa-times text-xl"></i>
-                </button>
-                <div class="w-16 h-16 mx-auto bg-white/20 rounded-full flex items-center justify-center mb-3">
-                    <i class="fas fa-paper-plane text-2xl"></i>
-                </div>
-                <h3 class="text-2xl font-bold mb-1">השאירו פרטים</h3>
-                <p class="text-blue-100 text-sm">ונשלח אליכם את כל המידע באופן מיידי</p>
-            </div>
-            
-            <!-- אזור טופס -->
-            <div class="p-6 md:p-8 bg-gray-50">
-                <form id="leadForm" onsubmit="submitForm(event)">
-                    
-                    <div class="mb-4 relative">
-                        <label class="block text-gray-700 text-sm font-bold mb-2" for="name">שם מלא <span class="text-red-500">*</span></label>
-                        <div class="relative">
-                            <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-gray-400">
-                                <i class="fas fa-user"></i>
+                <div class="phone-col">
+                    <div class="phone" aria-label="הדגמה של מייל פון">
+                        <div class="phone-speaker"></div>
+                        <div class="screen" id="screen">
+                            <div class="screen-head">
+                                <span id="stage"></span>
+                                <span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
                             </div>
-                            <input class="shadow-sm border border-gray-300 rounded-xl w-full py-3 px-4 pr-10 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-brand-blue focus:border-transparent transition-all" id="name" type="text" placeholder="הכנס שם מלא..." required>
+                            <p class="heard" id="heard" aria-live="polite"></p>
+                            <p class="prompt" id="prompt"></p>
+                        </div>
+                        <div class="keys" id="keys">
+                            <button class="key" data-key="1" data-cursor="הקישו" type="button"><b>1</b><small>גוף המייל</small></button>
+                            <button class="key" data-key="2" data-cursor="הקישו" type="button"><b>2</b><small>תשובה בקול</small></button>
+                            <button class="key" data-key="3" data-cursor="הקישו" type="button"><b>3</b><small>סימון כנקרא</small></button>
+                            <button class="key" data-key="4" data-cursor="הקישו" type="button"><b>4</b><small>המייל הבא</small></button>
+                            <button class="key idle" data-key="5" type="button" aria-label="5, לא פעיל"><b>5</b></button>
+                            <button class="key" data-key="6" data-cursor="הקישו" type="button"><b>6</b><small>המייל הקודם</small></button>
+                            <button class="key" data-key="7" data-cursor="הקישו" type="button"><b>7</b><small>לאשפה</small></button>
+                            <button class="key" data-key="8" data-cursor="הקישו" type="button"><b>8</b><small>פרטי המייל</small></button>
+                            <button class="key" data-key="9" data-cursor="הקישו" type="button"><b>9</b><small>מייל חדש לשולח</small></button>
+                            <button class="key idle" data-key="*" type="button" aria-label="כוכבית, לא פעיל"><b>*</b></button>
+                            <button class="key idle" data-key="0" type="button" aria-label="0, לא פעיל"><b>0</b></button>
+                            <button class="key idle" data-key="#" type="button" aria-label="סולמית, לא פעיל"><b>#</b></button>
                         </div>
                     </div>
-                    
-                    <div class="mb-4 relative">
-                        <label class="block text-gray-700 text-sm font-bold mb-2" for="email">כתובת מייל <span class="text-red-500">*</span></label>
-                        <div class="relative">
-                            <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-gray-400">
-                                <i class="fas fa-envelope"></i>
-                            </div>
-                            <input class="shadow-sm border border-gray-300 rounded-xl w-full py-3 px-4 pr-10 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-brand-blue focus:border-transparent transition-all" id="email" type="email" placeholder="example@gmail.com" required dir="ltr" style="text-align: right;">
-                        </div>
+                    <p class="phone-note">מיילים לדוגמה. בשיחה אמיתית שומעים הכול בקול.</p>
+                </div>
+                <div class="track">
+                    <button data-phase="0" aria-pressed="true" data-cursor="בחרו">להאזין</button>
+                    <i><b></b></i>
+                    <button data-phase="1" aria-pressed="false" data-cursor="בחרו">לענות</button>
+                    <i><b></b></i>
+                    <button data-phase="2" aria-pressed="false" data-cursor="בחרו">לכתוב</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="facts" id="facts" data-tone="dark">
+            <div class="section-top"><span>הפרטים</span><span>מה שקורה מאחורי הקו</span></div>
+            <div class="facts-head">
+                <h2 class="reveal">בנוי לשימוש<br><span class="blue">של כל יום.</span></h2>
+                <p class="reveal">לא הדגמה נוצצת. כלי שמתקשרים אליו בבוקר, בדרך, ובין מנחה למעריב.</p>
+            </div>
+            <div class="facts-list">
+                <div class="fact reveal"><h3>בלי המתנה על הקו</h3><p>המיילים מוכנים להשמעה מראש, עוד לפני שהתקשרתם. מקישים ושומעים מיד.</p></div>
+                <div class="fact reveal"><h3>מייל ארוך? שומעים תקציר</h3><p>במקום להאזין דקות ארוכות, מייל ארוך מוקרא כתקציר קצר וברור.</p></div>
+                <div class="fact reveal"><h3>התשובה נכתבת כמו שאמרתם</h3><p>ההקלטה הופכת לטקסט מסודר, בלי תוספות. שומעים אותו לפני השליחה ורק אז מאשרים.</p></div>
+                <div class="fact reveal"><h3>שובת בשבת ובחג</h3><p>המערכת לא פועלת בשבת ובחג. במוצאי שבת היא משלימה את המיילים שהגיעו בינתיים.</p></div>
+                <div class="fact reveal"><h3>רק מהטלפון שלכם</h3><p>הכניסה לתיבה פתוחה רק למספר הטלפון שהגדרתם. מתקשר אחר לא שומע דבר.</p></div>
+                <div class="fact reveal"><h3>עובד עם Gmail</h3><p>מתחבר לתיבת ה-Gmail הקיימת שלכם. תשובה נכנסת לאותה שרשרת מיילים, כמו במחשב.</p></div>
+            </div>
+        </section>
+
+        <!-- מסלול הדיבור החופשי, עם בינה מלאכותית -->
+        <section class="talk" id="talk" data-tone="light">
+            <div class="section-top"><span>מסלול נוסף</span><span>עם בינה מלאכותית</span></div>
+            <div class="talk-grid">
+                <div class="reveal">
+                    <p class="eyebrow">בלי מקשים בכלל</p>
+                    <h2>מעדיפים<br><span>פשוט לדבר?</span></h2>
+                    <p class="description">אומרים בעברית רגילה מה צריך, והמערכת מחפשת, מקריאה, מסכמת ושולחת. המקשים מהירים וצפויים. הדיבור חופשי וגמיש.</p>
+                </div>
+                <div class="bubbles">
+                    <div class="bubble reveal">"יש לי מיילים חדשים?"</div>
+                    <div class="bubble reveal">"סכם לי את המיילים מהיום"</div>
+                    <div class="bubble reveal">"קרא לי את המייל האחרון"</div>
+                    <div class="bubble reveal">"שלח מייל לפלוני ש..."</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="finish" id="details" data-tone="dark">
+            <div class="finish-grid">
+                <div>
+                    <p class="eyebrow reveal">הצעד הבא</p>
+                    <h2 class="reveal">מייל פון.<br><span class="blue">על הקו שלכם.</span></h2>
+                    <p class="description reveal">השאירו פרטים, והמידע המלא יישלח אליכם למייל מיד.</p>
+                    <p class="contact-line reveal">מעדיפים לדבר? <a href="tel:0533182643" dir="ltr" data-cursor="חייגו">053-3182643</a></p>
+                </div>
+
+                <form class="form-card reveal" id="leadForm" onsubmit="submitForm(event)">
+                    <div class="field">
+                        <label for="name">שם מלא</label>
+                        <input id="name" type="text" autocomplete="name" required>
                     </div>
-                    
-                    <div class="mb-6 relative">
-                        <label class="block text-gray-700 text-sm font-bold mb-2" for="phone">מספר טלפון <span class="text-gray-400 font-normal">(אופציונלי)</span></label>
-                        <div class="relative">
-                            <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-gray-400">
-                                <i class="fas fa-phone"></i>
-                            </div>
-                            <input class="shadow-sm border border-gray-300 rounded-xl w-full py-3 px-4 pr-10 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-brand-blue focus:border-transparent transition-all" id="phone" type="tel" placeholder="050-0000000" dir="ltr" style="text-align: right;">
-                        </div>
+                    <div class="field">
+                        <label for="email">כתובת מייל</label>
+                        <input id="email" type="email" autocomplete="email" placeholder="example@gmail.com" dir="ltr" required>
                     </div>
-                    
-                    <!-- צ'קבוקס אישור דיוור -->
-                    <div class="mb-6 flex items-start gap-2">
-                        <input type="checkbox" id="marketing-consent" required class="mt-1 w-4 h-4 cursor-pointer accent-brand-blue">
-                        <label for="marketing-consent" class="text-xs text-gray-600 cursor-pointer leading-tight">
-                            אני מאשר/ת קבלת עדכונים, טיפים והצעות שיווקיות למייל.
-                            <span class="block text-[10px] text-gray-400 mt-0.5">(ניתן להסיר בכל עת)</span>
-                        </label>
+                    <div class="field">
+                        <label for="phone-input">מספר טלפון <span>(לא חובה)</span></label>
+                        <input id="phone-input" type="tel" autocomplete="tel" placeholder="050-0000000" dir="ltr">
                     </div>
-                    
-                    <div class="flex items-center justify-center">
-                        <button id="submitBtn" class="w-full bg-brand-cyan hover:bg-cyan-600 text-white font-bold py-3.5 px-4 rounded-xl shadow-lg focus:outline-none focus:ring-4 focus:ring-cyan-300 transition duration-300 flex justify-center items-center gap-2 text-lg" type="submit">
-                            <span>שלח פרטים עכשיו</span>
-                            <i class="fas fa-arrow-left"></i>
-                        </button>
+                    <div class="field">
+                        <label for="track">מה מעניין אתכם? <span>(לא חובה)</span></label>
+                        <select id="track">
+                            <option value="">עוד לא החלטתי</option>
+                            <option value="מקשים">מייל פון במקשים</option>
+                            <option value="דיבור">מסלול הדיבור עם בינה מלאכותית</option>
+                            <option value="שניהם">שניהם</option>
+                        </select>
                     </div>
-                    
-                    <!-- הודעת חיווי על שליחה -->
-                    <div id="formMessage" class="hidden mt-4 text-center font-bold text-sm p-3 rounded-lg"></div>
+                    <label class="consent">
+                        <input type="checkbox" id="marketing-consent" required>
+                        <span>אני מאשר/ת קבלת עדכונים, טיפים והצעות שיווקיות למייל. אפשר להסיר בכל עת.</span>
+                    </label>
+                    <button class="send" id="submitBtn" type="submit" data-cursor="שלחו">שלחו לי את הפרטים</button>
+                    <div id="formMessage" class="form-msg" hidden></div>
                 </form>
             </div>
-        </div>
-    </div>
 
-    <!-- סקריפט עיקרי של האתר -->
+            <footer>
+                <span class="brand"><strong>מייל <i>פון</i></strong></span>
+                <span>&copy; 2026 מייל פון. המייל שלך, בקול שלך.</span>
+                <span>מבית <a href="https://6161358-arch.github.io/Simple._Automatic./" data-cursor="↗">פשוט. אוטומט.</a></span>
+            </footer>
+        </section>
+    </main>
+
     <script>
-        // אנימציית הקלדה (שיירנו מהגרסה הקודמת)
-        const textElement = document.getElementById('typing-text');
-        const phrases = [
-            "פתרון מהפכני, פשוט, מהיר ובטוח.",
-            "בלי אפליקציות. בלי מסכים. פשוט מדברים.",
-            "מושלם לבעלי טלפון כשר.",
-            "ניהול מיילים 24/7 ללא צורך באינטרנט."
-        ];
-        let phraseIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
+        document.documentElement.classList.add('js');
+        const $ = (s) => document.querySelector(s);
+        const $$ = (s) => [...document.querySelectorAll(s)];
+        const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const smallScreen = matchMedia('(max-width: 860px)');
 
-        function typeEffect() {
-            const currentPhrase = phrases[phraseIndex];
-            
-            if (isDeleting) {
-                textElement.innerText = currentPhrase.substring(0, charIndex - 1);
-                charIndex--;
-            } else {
-                textElement.innerText = currentPhrase.substring(0, charIndex + 1);
-                charIndex++;
-            }
-
-            let typeSpeed = isDeleting ? 30 : 80;
-
-            if (!isDeleting && charIndex === currentPhrase.length) {
-                typeSpeed = 2000;
-                isDeleting = true;
-            } else if (isDeleting && charIndex === 0) {
-                isDeleting = false;
-                phraseIndex = (phraseIndex + 1) % phrases.length;
-                typeSpeed = 500;
-            }
-
-            setTimeout(typeEffect, typeSpeed);
+        // ---------- סמן עגול (רק עם עכבר) ----------
+        const cursor = $('#cursor');
+        const pointer = { x: -1000, y: -1000 };
+        let cx = -1000, cy = -1000;
+        function updateCursorTone() {
+            if (pointer.x < 0) return;
+            const under = document.elementFromPoint(pointer.x, pointer.y);
+            const light = !!(under && under.closest('[data-tone="light"]')) && !(under && under.closest('.phone'));
+            cursor.style.setProperty('--cursor-ink', light ? '#0a1f44' : '#9cc6ff');
+            cursor.style.setProperty('--cursor-inverse', light ? '#f3f7fd' : '#071a3d');
         }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            setTimeout(typeEffect, 1000);
+        addEventListener('pointermove', (e) => {
+            pointer.x = e.clientX; pointer.y = e.clientY;
+            if (e.pointerType === 'mouse') { cursor.style.opacity = 1; document.body.classList.add('has-cursor'); }
+            updateCursorTone();
+        });
+        document.documentElement.addEventListener('pointerleave', () => { cursor.style.opacity = 0; pointer.x = -1000; });
+        $$('a, button, [data-cursor]').forEach((el) => {
+            el.addEventListener('pointerenter', () => { cursor.classList.add('active'); cursor.querySelector('span').textContent = el.dataset.cursor || '↗'; });
+            el.addEventListener('pointerleave', () => { cursor.classList.remove('active'); cursor.querySelector('span').textContent = ''; });
         });
 
-        // ----- ניהול המודל (Pop-up) והטופס ----- //
-        const modal = document.getElementById('leadModal');
-        const modalContent = document.getElementById('modalContent');
+        // ---------- "הרעיון": פירוק המשפט למילים שנדלקות בגלילה ----------
+        const reading = $('.reading');
+        const walker = document.createTreeWalker(reading, NodeFilter.SHOW_TEXT);
+        const textNodes = [];
+        while (walker.nextNode()) textNodes.push(walker.currentNode);
+        for (const node of textNodes) {
+            const fragment = document.createDocumentFragment();
+            node.textContent.split(/(\s+)/).forEach((part) => {
+                if (!part.trim()) { fragment.append(document.createTextNode(part)); return; }
+                const span = document.createElement('span');
+                span.className = 'word';
+                span.textContent = part;
+                fragment.append(span);
+            });
+            node.replaceWith(fragment);
+        }
+        const words = $$('.reading .word');
 
-        function openModal() {
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-            // Timeout קטן בשביל האנימציה (Fade-in + Scale)
-            setTimeout(() => {
-                modal.classList.remove('opacity-0');
-                modalContent.classList.remove('scale-95');
-                modalContent.classList.add('scale-100');
-            }, 10);
+        // ---------- כניסה של חלקי העמוד בגלילה ----------
+        const revealObserver = new IntersectionObserver((entries) => entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add('visible');
+            revealObserver.unobserve(entry.target);
+        }), { threshold: 0.12 });
+        $$('.reveal').forEach((el) => {
+            const i = Array.prototype.indexOf.call(el.parentNode.children, el);
+            el.style.setProperty('--d', (i % 2) * 0.1 + 's');
+            revealObserver.observe(el);
+        });
+
+        // ---------- הדגמת הטלפון ----------
+        // מיילים לדוגמה בלבד. המקשים זהים למקשים שבשלוחת ההאזנה האמיתית.
+        const SAMPLE_MAILS = [
+            {
+                from: 'משה כהן', subject: 'הצעת מחיר להדפסת ההזמנות',
+                body: 'שלום, מצרף את הצעת המחיר להדפסת חמש מאות הזמנות. המחיר כולל משלוח עד הבית. אשמח לאישור עד יום חמישי.',
+                details: 'המייל נשלח ביום שלישי, בשעה 14:32. כתובת השולח: moshe, שטרודל, ג\'ימייל נקודה קום.'
+            },
+            {
+                from: 'ועד הבניין', subject: 'תיקון המעלית ביום ראשון',
+                body: 'לדיירים שלום. ביום ראשון בין תשע לאחת תושבת המעלית לצורך תיקון. תודה על הסבלנות.',
+                details: 'המייל נשלח ביום שני, בשעה 20:10. כתובת השולח: vaad, שטרודל, ג\'ימייל נקודה קום.'
+            },
+            {
+                from: 'הנהלת החשבונות', subject: 'החשבונית לחודש תשרי',
+                body: 'תקציר המייל: החשבונית לחודש תשרי מוכנה. הסכום לתשלום זהה לחודש הקודם, והמועד האחרון הוא סוף החודש.',
+                details: 'המייל נשלח ביום ראשון, בשעה 09:05. כתובת השולח: office, שטרודל, ג\'ימייל נקודה קום.'
+            }
+        ];
+        const MENU_PROMPT = 'הקישו מקש כדי להמשיך';
+        const CONFIRM_PROMPT = '1 שליחה · 2 הקלטה מחדש · 3 ביטול';
+
+        const screenEl = $('#screen'), stageEl = $('#stage'), heardEl = $('#heard'), promptEl = $('#prompt'), keysEl = $('#keys');
+        let mails, index, mode;           // mode: menu = תפריט ההאזנה, confirm = אישור תשובה שהוקלטה
+        let talkTimer = null, replyTimer = null;
+        const announce = (m) => 'מאת ' + m.from + ', בנושא: ' + m.subject + '.';
+
+        function resetCall() { mails = SAMPLE_MAILS.slice(); index = 0; mode = 'menu'; clearTimeout(replyTimer); }
+
+        function say(stage, text, prompt) {
+            stageEl.textContent = stage;
+            heardEl.textContent = text;
+            promptEl.textContent = prompt || '';
+            heardEl.classList.remove('swap');
+            void heardEl.offsetWidth;   // מפעיל מחדש את האנימציה
+            heardEl.classList.add('swap');
+            screenEl.classList.add('talking');
+            clearTimeout(talkTimer);
+            talkTimer = setTimeout(() => screenEl.classList.remove('talking'), 2200);
         }
 
-        function closeModal() {
-            // הוספת האנימציה ההפוכה (Fade-out)
-            modal.classList.add('opacity-0');
-            modalContent.classList.remove('scale-100');
-            modalContent.classList.add('scale-95');
-            
-            setTimeout(() => {
-                modal.classList.add('hidden');
-                modal.classList.remove('flex');
-                
-                // איפוס הטופס לקראת הפתיחה הבאה
-                document.getElementById('leadForm').reset();
-                const messageDiv = document.getElementById('formMessage');
-                messageDiv.classList.add('hidden');
-                messageDiv.className = 'hidden mt-4 text-center font-bold text-sm p-3 rounded-lg';
-                
-                const btn = document.getElementById('submitBtn');
-                btn.disabled = false;
-                btn.innerHTML = '<span>שלח פרטים עכשיו</span><i class="fas fa-arrow-left"></i>';
-                btn.classList.remove('opacity-70', 'cursor-not-allowed', 'bg-green-500', 'hover:bg-green-600');
-                btn.classList.add('bg-brand-cyan', 'hover:bg-cyan-600');
-            }, 300); // 300ms זה זמן ה-Transition ב-Tailwind
+        function recordReply() {
+            mode = 'confirm';
+            say('תשובה בהקלטה', 'הקליטו את התשובה אחרי הצליל...', '');
+            replyTimer = setTimeout(() => {
+                say('תשובה בהקלטה', 'זו התשובה שלכם: "קיבלתי, תודה רבה. מאשר את ההזמנה." לשליחה הקישו 1.', CONFIRM_PROMPT);
+            }, 1700);
         }
 
-        // שליחת הטופס ל-Webhook
+        // תפריט ההאזנה - כמו בשיחה אמיתית
+        function pressKey(key) {
+            clearTimeout(replyTimer);
+            if (!mails.length) { resetCall(); say('מייל חדש', announce(mails[0]), MENU_PROMPT); return; }
+            const mail = mails[index];
+
+            if (mode === 'confirm') {
+                if (key === '1') { mode = 'menu'; say('תשובה בהקלטה', 'התשובה נשלחה אל ' + mail.from + '.', MENU_PROMPT); }
+                else if (key === '2') { recordReply(); }
+                else if (key === '3') { mode = 'menu'; say('תשובה בהקלטה', 'התשובה בוטלה.', MENU_PROMPT); }
+                else { say('תשובה בהקלטה', 'לשליחה הקישו 1. להקלטה מחדש הקישו 2. לביטול הקישו 3.', CONFIRM_PROMPT); }
+                return;
+            }
+            switch (key) {
+                case '1': say('גוף המייל', mail.body, MENU_PROMPT); break;
+                case '2': recordReply(); break;
+                case '3': say('סימון כנקרא', 'המייל סומן כנקרא.', MENU_PROMPT); break;
+                case '4':
+                    if (index < mails.length - 1) { index++; say('המייל הבא', announce(mails[index]), MENU_PROMPT); }
+                    else say('המייל הבא', 'זה המייל האחרון ברשימה.', MENU_PROMPT);
+                    break;
+                case '6':
+                    if (index > 0) { index--; say('המייל הקודם', announce(mails[index]), MENU_PROMPT); }
+                    else say('המייל הקודם', 'זה המייל החדש ביותר.', MENU_PROMPT);
+                    break;
+                case '7':
+                    mails.splice(index, 1);
+                    if (index >= mails.length) index = Math.max(0, mails.length - 1);
+                    if (mails.length) say('אשפה', 'המייל הועבר לאשפה. ' + announce(mails[index]), MENU_PROMPT);
+                    else say('אשפה', 'המייל הועבר לאשפה. אין מיילים נוספים.', 'הקישו מקש כדי להתחיל מחדש');
+                    break;
+                case '8': say('פרטי המייל', mail.details, MENU_PROMPT); break;
+                case '9': say('מייל חדש לשולח', 'מייל חדש אל ' + mail.from + '. הקליטו את נושא המייל אחרי הצליל.', MENU_PROMPT); break;
+                default: say('תפריט ההאזנה', 'המקש הזה לא פעיל בתפריט ההאזנה.', MENU_PROMPT);
+            }
+        }
+
+        // ---------- שלושת שלבי השיחה ----------
+        // ✏️ כאן משנים את הכותרות והטקסטים של כל שלב, ואת סדר המקשים שהטלפון מדגים לבד.
+        // steps: כל שורה היא מקש אחד. wait = כמה זמן להמתין אחריו (באלפיות שנייה).
+        // בשלב "לכתוב" (plain) המסך מציג את הטקסט שכתוב ב-say, כי זה תפריט אחר (כתיבת מייל חדש).
+        const PHASES = [
+            {
+                number: '01 — להאזין',
+                title: 'ממי. על מה.<br>ורק אז כל המייל.',
+                copy: 'מקש 1 משמיע את המייל. 4 ו-6 עוברים בין המיילים. 8 אומר מתי נשלח ומאיזו כתובת.',
+                intro: () => ['מייל חדש', announce(mails[0]), 'לשמיעת המייל הקישו 1'],
+                steps: [{ key: '1', wait: 4200 }, { key: '4' }, { key: '1', wait: 4200 }, { key: '8', wait: 4200 }]
+            },
+            {
+                number: '02 — לענות',
+                title: 'אומרים תשובה.<br>שומעים אותה. שולחים.',
+                copy: 'ההקלטה הופכת לטקסט, בלי תוספות. שומעים אותו לפני שמאשרים, ואפשר להקליט מחדש.',
+                intro: () => ['מייל חדש', announce(mails[0]), 'להחזרת תשובה הקישו 2'],
+                steps: [{ key: '2', wait: 5200 }, { key: '1', wait: 3600 }]
+            },
+            {
+                number: '03 — לכתוב',
+                title: 'מייל חדש.<br>לכל כתובת.',
+                copy: 'מקלידים כתובת או אומרים שם מאנשי הקשר. מקליטים נושא ותוכן, שומעים ומאשרים. אפשר גם לכמה נמענים.',
+                plain: true,
+                intro: () => ['תפריט ראשי', 'להאזנה למיילים הקישו 1. לכתיבת מייל חדש הקישו 2. למיילים ששלחתם הקישו 3.', ''],
+                steps: [
+                    { key: '2', say: ['מייל חדש', 'להקלדת כתובת המייל הקישו 1. לבחירה מאנשי הקשר הקישו 2.', ''] },
+                    { key: '2', say: ['אנשי קשר', 'אמרו את שם איש הקשר אחרי הצליל...', ''], wait: 2200 },
+                    { say: ['אנשי קשר', 'נמצא: משה כהן. לאישור הקישו 1.', ''] },
+                    { key: '1', say: ['נושא ותוכן', 'מקליטים את הנושא, ואחריו את תוכן המייל. כל אחד מוקרא לכם לאישור.', 'לשליחה הקישו 1'], wait: 4200 },
+                    { key: '1', say: ['שליחה', 'המייל נשלח אל משה כהן.', ''], wait: 3600 }
+                ]
+            }
+        ];
+        const STEP_WAIT = 3200;     // המתנה רגילה בין מקש למקש
+        const callSection = $('#call'), callCopy = $('#call-copy');
+        let phase = -1, step = 0, stepTimer = null, callInView = false;
+
+        function flash(key) {
+            const button = keysEl.querySelector('.key[data-key="' + key + '"]');
+            if (!button) return;
+            button.classList.add('lit');
+            setTimeout(() => button.classList.remove('lit'), 260);
+        }
+        function schedule(ms) {
+            clearTimeout(stepTimer);
+            if (!reducedMotion) stepTimer = setTimeout(tick, ms);
+        }
+        function runStep(s) {
+            if (s.key) flash(s.key);
+            if (s.say) say(...s.say); else pressKey(s.key);
+            step++;
+        }
+        // הטלפון מדגים לבד: מקש אחרי מקש, ובסוף השלב מתחיל שוב (במסך קטן - עובר לשלב הבא)
+        function tick() {
+            if (!callInView || document.hidden) { schedule(1000); return; }
+            const s = PHASES[phase].steps[step];
+            if (!s) { startPhase(smallScreen.matches ? (phase + 1) % PHASES.length : phase); return; }
+            runStep(s);
+            schedule(s.wait || STEP_WAIT);
+        }
+        function startPhase(n) {
+            const changed = n !== phase;
+            phase = n; step = 0;
+            resetCall();
+            const p = PHASES[n];
+            if (changed) {
+                $('#phase-number').textContent = p.number;
+                $('#phase-title').innerHTML = p.title;
+                $('#phase-copy').textContent = p.copy;
+                callCopy.classList.remove('swap'); void callCopy.offsetWidth; callCopy.classList.add('swap');
+                $$('[data-phase]').forEach((el) => el.setAttribute('aria-pressed', +el.dataset.phase === n));
+            }
+            keysEl.classList.toggle('plain', !!p.plain);
+            say(...p.intro());
+            schedule(2600);
+        }
+        // לחיצה של הגולש: ההדגמה האוטומטית נעצרת ל-9 שניות, ואז ממשיכה מתחילת השלב
+        function userPress(key) {
+            const p = PHASES[phase];
+            if (p.plain) {
+                const s = p.steps[step];
+                if (s && s.key === key) { runStep(s); schedule(s.wait || STEP_WAIT); }
+                else if (!s) startPhase(phase);
+                else { say('כתיבת מייל', 'המקש הזה לא פעיל בשלב הזה.', ''); clearTimeout(stepTimer); if (!reducedMotion) stepTimer = setTimeout(() => startPhase(phase), 4000); }
+                return;
+            }
+            pressKey(key);
+            clearTimeout(stepTimer);
+            if (!reducedMotion) stepTimer = setTimeout(() => startPhase(phase), 9000);
+        }
+        keysEl.addEventListener('click', (e) => {
+            const button = e.target.closest('.key');
+            if (button) userPress(button.dataset.key);
+        });
+        // אפשר להקיש גם במקלדת המחשב, כשהטלפון מול העיניים (ולא בזמן מילוי הטופס)
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey || e.altKey || e.metaKey || !callInView) return;
+            if (e.target.closest('input, select, textarea')) return;
+            if (!/^[0-9*#]$/.test(e.key)) return;
+            flash(e.key);
+            userPress(e.key);
+        });
+        // כשהטלפון נכנס למסך, השלב מתחיל מההתחלה
+        new IntersectionObserver((entries) => {
+            const now = entries[0].isIntersecting;
+            if (now && !callInView && phase >= 0) startPhase(phase);
+            callInView = now;
+        }, { threshold: 0.05 }).observe(callSection);
+
+        $$('[data-phase]').forEach((el) => el.onclick = () => {
+            const n = +el.dataset.phase;
+            if (smallScreen.matches) { startPhase(n); return; }
+            const top = scrollY + callSection.getBoundingClientRect().top + (callSection.offsetHeight - innerHeight) * [0.05, 0.5, 0.94][n];
+            scrollTo({ top, behavior: reducedMotion ? 'instant' : 'smooth' });
+        });
+
+        // ---------- כל מה שתלוי בגלילה ----------
+        function scrollUpdate() {
+            const y = scrollY, v = innerHeight;
+            $('.progress').style.transform = 'scaleY(' + y / Math.max(1, document.documentElement.scrollHeight - v) + ')';
+
+            const r = reading.getBoundingClientRect();
+            const readProgress = Math.max(0, Math.min(1, (v * 0.84 - r.top) / (r.height + v * 0.18)));
+            words.forEach((el, i) => el.classList.toggle('lit', reducedMotion || i / words.length < readProgress));
+            $('.asterisk').style.transform = 'rotate(' + (reducedMotion ? 0 : y * 0.07) + 'deg)';
+
+            if (!smallScreen.matches) {
+                const box = callSection.getBoundingClientRect();
+                const progress = Math.max(0, Math.min(1, -box.top / Math.max(1, box.height - v)));
+                const current = Math.min(2, Math.floor(progress * 3));
+                if (current !== phase) startPhase(current);
+                $$('.track b').forEach((el, i) => el.style.width = Math.max(0, Math.min(1, progress * 2 - i)) * 100 + '%');
+            } else {
+                $$('.track b').forEach((el, i) => el.style.width = (phase > i ? 100 : 0) + '%');
+            }
+            updateCursorTone();
+        }
+        addEventListener('scroll', scrollUpdate, { passive: true });
+        if (phase < 0) startPhase(0);
+        scrollUpdate();
+
+        // ---------- הלוגו מנקודות ----------
+        // הנקודות נדגמות מתמונת הלוגו (עותק קטן שמוטמע כאן, כדי שזה יעבוד גם מקובץ מקומי).
+        const hero = $('.hero'), canvas = $('#logo'), ctx = canvas.getContext('2d'), logoImage = new Image();
+        let particles = [], width = 0, height = 0, started = performance.now(), burstAt = -10000, ready = false;
+        const LOGO_ASPECT = 0.7611;    // גובה חלקי רוחב של סמל הלוגו
+        function resizeLogo() {
+            const rect = hero.getBoundingClientRect(), d = Math.min(devicePixelRatio, 2);
+            width = rect.width; height = rect.height;
+            canvas.width = width * d; canvas.height = height * d;
+            ctx.setTransform(d, 0, 0, d, 0, 0);
+        }
+        function seeded(n) { const x = Math.sin(n * 78.233 + 17.17) * 43758.5453; return x - Math.floor(x); }
+        function sampleLogo() {
+            const w = logoImage.naturalWidth, h = logoImage.naturalHeight;
+            const temp = document.createElement('canvas'); temp.width = w; temp.height = h;
+            const g = temp.getContext('2d', { willReadFrequently: true });
+            g.drawImage(logoImage, 0, 0);
+            const data = g.getImageData(0, 0, w, h).data, candidates = [];
+            for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
+                const i = (y * w + x) * 4;
+                if (data[i + 3] < 140) continue;
+                // הכחול הכהה של הלוגו הופך לנקודות בהירות, והכחול של המעטפה נשאר כחול
+                const navy = data[i + 2] < 150;
+                candidates.push({ u: x / w - 0.5, v: (y / h - 0.5) * LOGO_ASPECT, navy });
+            }
+            const shuffled = candidates.map((p, i) => ({ ...p, sortKey: seeded(i) })).sort((a, b) => a.sortKey - b.sortKey);
+            const count = Math.min(innerWidth < 860 ? 1700 : 2800, shuffled.length);
+            particles = shuffled.slice(0, count).map((p, i) => ({
+                ...p, scatterX: 0, scatterY: 0,
+                seed: seeded(i + 7000) * 6.28,
+                size: 0.75 + Math.pow(seeded(i + 9000), 2) * 2.1
+            }));
+            started = performance.now();
+            ready = true;
+        }
+        function scatter() {
+            burstAt = performance.now();
+            particles.forEach((p, i) => {
+                p.scatterX = width * (0.025 + 0.95 * seeded(i + 12000 + burstAt));
+                p.scatterY = height * (0.04 + 0.90 * seeded(i + 16000 + burstAt));
+            });
+        }
+        $('#scatter-logo').onclick = scatter;
+        resizeLogo();
+        logoImage.onload = sampleLogo;
+        logoImage.src = 'data:image/png;base64,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HSlZTSknzpPG1oKz1dYjSLly5gVYaREOZ6CkmVkniBABIJciZwx5USZbQFlIEzHiNJKyM1LyVsuaIy/EVYYHKMgKML3tQuqDdsvKak4KbxwcQ5ljNDG/evgOk+eF4Vxz9WPf9Y/HPt7VU9qMmTWyzAHUlBlvEkPZivOCQhzfst8OTS+vY8WuWYFMWtsZGoYEwCC96fXktP543O4KVpaERftQFAPEebEo0hguXjn7G9PvDGP1WboOPPaQU225x8yPLVzReynnG8mpX0cryZoVmlw2aiF4JVgTwacpYpCHL3NDjn7R/vx1XxJRHmLqkplpgbc/429XLDYbNRctwSBGnhxi7evRctfzsZQWFCJ+hURfKZWTnkhjaqqPxzfWRVss7+6Z1sd123RR07RybixK/UWNGWAoaebKmpk1Z3npUFMorRGqHCCGxnCAOICioF5qbGa6FFZhG8VwPiPBqIchn90UFWVXwhBqZkUQYp1RtuuVchAAchDjoUJIqV7qxfLUzpd++9Jlx3zaDQQYWlpachf++Z7HfDRqW3BOFUqsKZgNEgHIROq9Q4FE6m16/PKnr7kWzc1meK+c9X2EmPvgWVfvNrdj5I198dgJYspq2RMTo2iMikY6UduXHbxxeuSfzz748ebmZtNW89r2jZQnzz7709e2nv/rR7rL6R5amZjUmNwPW4QMOvMMkM/6lwwvHmwieBG2toBSuXjmlu879omXHr36UtHBeUpzc5shmukP/8qN11BvR3O3853Gpy9Z0uuPPPSD1++yZf+8j18zrdu0hnG61OwLhoHk4Yuj3y3cedxPbn7mpFX93Z/s4xHbJlwHBYkX4eB/EwU4acWmTmsYzYOq+tptPPzEOYcoKsBJGPMzM5gJzpVhwGAy8FCATRUzMqybGr110bQ37LpTBHEKIqsGOS5IV/+2E/V/ntMgKN6y3bN6/vkktz+x/GCba9rSc6ypDz6IhEBEZY4hgDKBLelL79t92wduefoaoG073UACFfrA7EML/+/2ngv782MmGBJhE7F4AnEEUugITnmk9F96xdeOeBwt4LbWwTcSrcsds8M+J39zwfLe75VN5CXT4XnDQAaHlllWFAaf7MocgkFKMAqxUI5936K9PrDlATf/+ccvDmONjPue0xE//sPfjl62fOn8S795yFNbb7VVt652MmYympurDOHshqziyc75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';
+        addEventListener('resize', () => { resizeLogo(); scrollUpdate(); });
+
+        function frame(t) {
+            requestAnimationFrame(frame);
+            cx += (pointer.x - cx) * 0.24; cy += (pointer.y - cy) * 0.24;
+            cursor.style.transform = 'translate(' + (cx - cursor.offsetWidth / 2) + 'px,' + (cy - cursor.offsetHeight / 2) + 'px)';
+            if (!ready || document.hidden) return;
+            const r = hero.getBoundingClientRect();
+            if (r.bottom < 0 || r.top > innerHeight) return;
+            ctx.clearRect(0, 0, width, height);
+            const mobile = width < 860;
+            const scale = mobile ? width * 0.7 : Math.min(width * 0.36, height * 0.62);
+            const centerX = mobile ? width * 0.5 : width * 0.26;
+            const centerY = mobile ? height * 0.7 : height * 0.5;
+            const intro = reducedMotion ? 1 : 1 - Math.pow(1 - Math.min(1, (t - started) / 2000), 3);
+            const elapsed = (t - burstAt) / 1000;
+            const burst = reducedMotion ? 0 : elapsed < 0 ? 0 : elapsed < 0.16 ? elapsed / 0.16 : Math.pow(Math.max(0, 1 - (elapsed - 0.16) / 2.35), 1.6);
+            const mx = pointer.x - r.left, my = pointer.y - r.top;
+            for (const p of particles) {
+                let x = centerX + p.u * scale, y = centerY + p.v * scale;
+                x += (1 - intro) * Math.sin(p.seed * 13) * width * 0.55;
+                y += (1 - intro) * Math.cos(p.seed * 11) * height * 0.55;
+                if (!reducedMotion) {
+                    x += Math.sin(t * 0.001 + p.seed * 7) * 1.3;
+                    y += Math.cos(t * 0.0012 + p.seed * 7) * 1.5;
+                    const dx = x - mx, dy = y - my, d = Math.hypot(dx, dy);
+                    if (d < 90) { x += dx / (d || 1) * (1 - d / 90) * 20; y += dy / (d || 1) * (1 - d / 90) * 20; }
+                }
+                x = x * (1 - burst) + p.scatterX * burst;
+                y = y * (1 - burst) + p.scatterY * burst;
+                const glow = 0.7 + 0.3 * Math.sin(p.seed * 4 + t * 0.001);
+                ctx.fillStyle = p.navy ? 'rgba(226,237,255,' + (0.55 + 0.35 * intro) + ')' : 'rgba(79,157,255,' + (0.65 + 0.3 * intro) + ')';
+                ctx.beginPath();
+                ctx.arc(x, y, p.size * glow * (mobile ? 0.9 : 1.1), 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+        requestAnimationFrame(frame);
+
+        // ---------- טופס השארת פרטים ----------
         async function submitForm(event) {
-            event.preventDefault(); // מונע את ריענון הדף
-            
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const phone = document.getElementById('phone').value;
-            const consent = document.getElementById('marketing-consent').checked;
-            
+            event.preventDefault();
+
             const btn = document.getElementById('submitBtn');
-            const messageDiv = document.getElementById('formMessage');
-            
-            // מצב טעינה (Loading)
+            const msg = document.getElementById('formMessage');
             btn.disabled = true;
-            btn.classList.add('opacity-70', 'cursor-not-allowed');
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin text-xl"></i> <span>שולח נתונים...</span>';
-            messageDiv.classList.add('hidden');
-            
-            // ה-Webhook שלך ב-n8n
+            btn.textContent = 'שולח...';
+            msg.hidden = true;
+
+            // ה-Webhook ב-n8n שמקבל את הפרטים
             const webhookUrl = 'https://n8n.srv1256019.hstgr.cloud/webhook/d10da407-da0f-4735-8ec5-370a4df1636d';
-            
+
             try {
-                // צורת שליחה פשוטה זהה לקוד לדוגמה שסיפקת
                 await fetch(webhookUrl, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ 
-                        name: name, 
-                        phone: phone, 
-                        email: email, 
+                    body: JSON.stringify({
+                        name: document.getElementById('name').value,
+                        phone: document.getElementById('phone-input').value,
+                        email: document.getElementById('email').value,
+                        track: document.getElementById('track').value,
                         source: 'Landing Page Pop-up',
-                        marketingConsent: consent,
-                        date: new Date().toISOString() 
+                        marketingConsent: document.getElementById('marketing-consent').checked,
+                        date: new Date().toISOString()
                     })
                 });
-                
-                messageDiv.innerHTML = '<i class="fas fa-check-circle ml-1"></i> הפרטים נשלחו בהצלחה! המידע בדרך אליכם.';
-                messageDiv.className = 'mt-4 text-center font-bold text-sm p-3 rounded-lg bg-green-100 text-green-700 border border-green-200';
-                messageDiv.classList.remove('hidden');
-                
-                btn.classList.remove('bg-brand-cyan', 'hover:bg-cyan-600');
-                btn.classList.add('bg-green-500', 'hover:bg-green-600');
-                btn.innerHTML = '<i class="fas fa-check text-xl"></i> <span>נשלח בהצלחה</span>';
-                
-                // איפוס טופס וסגירת חלון אוטומטית
-                document.getElementById('leadForm').reset();
-                setTimeout(() => {
-                    closeModal();
-                }, 3000);
 
+                msg.textContent = 'הפרטים נשלחו. המידע בדרך למייל שלכם.';
+                msg.className = 'form-msg ok';
+                msg.hidden = false;
+                btn.textContent = 'הפרטים נשלחו';
+                document.getElementById('leadForm').reset();
             } catch (error) {
                 console.error('Error submitting form:', error);
-                
-                messageDiv.innerHTML = '<i class="fas fa-exclamation-circle ml-1"></i> אירעה שגיאה בשליחה. אנא נסו שוב.';
-                messageDiv.className = 'mt-4 text-center font-bold text-sm p-3 rounded-lg bg-red-100 text-red-700 border border-red-200';
-                messageDiv.classList.remove('hidden');
-                
+                msg.textContent = 'הפרטים לא נשלחו. בדקו את החיבור ונסו שוב, או התקשרו 053-3182643.';
+                msg.className = 'form-msg err';
+                msg.hidden = false;
                 btn.disabled = false;
-                btn.classList.remove('opacity-70', 'cursor-not-allowed');
-                btn.innerHTML = '<span>נסה שוב</span><i class="fas fa-redo"></i>';
+                btn.textContent = 'שלחו לי את הפרטים';
             }
         }
     </script>
