@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>מייל פון - המייל שלכם, במקשי הטלפון</title>
-    <meta name="description" content="מתקשרים, שומעים את המיילים, עונים בקול ושולחים מיילים חדשים. בלי אינטרנט ובלי מסך, מכל טלפון כשר.">
+    <meta name="description" content="מתקשרים, שומעים את המיילים, עונים בקול ושולחים מיילים חדשים. תקציר למייל ארוך, תרגום מאנגלית, תשובות מהירות, חיוג מקוצר וצינתוק על מייל חשוב. בלי אינטרנט ובלי מסך, מכל טלפון כשר.">
     <meta property="og:title" content="מייל פון - המייל שלכם, במקשי הטלפון">
     <meta property="og:description" content="מתקשרים, שומעים את המיילים, עונים בקול ושולחים מיילים חדשים. מכל טלפון כשר.">
     <meta property="og:image" content="https://6161358-arch.github.io/Mail_Phone/logo.png">
@@ -135,7 +135,7 @@
         .asterisk { font: 85px/1 Georgia, serif; color: #1667d9; }
 
         /* ---------- השיחה: הטלפון נשאר במקום, והגלילה מעבירה בין השלבים ---------- */
-        .call { height: 320vh; background: var(--paper); color: var(--ink); }
+        .call { height: 420vh; background: var(--paper); color: var(--ink); }
         .sticky {
             position: sticky; top: 0; height: 100svh; min-height: 660px; overflow: hidden;
             padding: 30px 7% 26px;
@@ -184,6 +184,7 @@
         .talking .bars i:nth-child(4) { animation-delay: .45s; }
         @keyframes bar { 0%, 100% { height: 4px; } 50% { height: 14px; } }
         .heard { font-size: 16.5px; line-height: 1.45; font-weight: 500; flex: 1; }
+        .heard.long { font-size: 14px; line-height: 1.4; }
         .heard.swap { animation: swap .25s ease-out; }
         .prompt { font-size: 13px; color: var(--muted-ink); margin-top: 8px; }
         .keys { direction: ltr; display: grid; grid-template-columns: repeat(3, 1fr); gap: 9px; margin-top: 16px; }
@@ -205,9 +206,24 @@
             box-shadow: 0 0 0 #061430, 0 0 24px rgba(255, 176, 0, .6);
         }
         .key.lit b, .key.lit small, .key:active b, .key:active small { color: var(--ink); }
-        .phone-note { text-align: center; font-size: 13px; color: var(--muted-ink); margin-top: 12px; }
+        .phone-note { text-align: center; font-size: 13px; color: var(--muted-ink); margin-top: 8px; }
+        /* צינתוק: הטלפון רועד לרגע */
+        .phone.ringing { animation: ring .14s linear 10; }
+        @keyframes ring { 0%, 100% { transform: rotate(0); } 25% { transform: rotate(-1.6deg); } 75% { transform: rotate(1.6deg); } }
+        /* כפתור הקול: כבוי בהתחלה, כי דפדפנים לא מרשים לאתר להשמיע קול לבד */
+        .sound-btn {
+            display: flex; align-items: center; justify-content: center; gap: 9px;
+            margin: 14px auto 0; padding: 8px 18px; border-radius: 50px;
+            border: 1px solid #0a1f4455; background: #fff; color: var(--ink);
+            font-size: 15px; font-weight: 700; transition: background .2s, border-color .2s;
+        }
+        .sound-btn svg { width: 20px; height: 20px; }
+        .sound-btn .wave { opacity: 0; transition: opacity .2s; }
+        .sound-btn[aria-pressed=true] { background: var(--amber); border-color: var(--amber); }
+        .sound-btn[aria-pressed=true] .wave { opacity: 1; }
+        .sound-btn[aria-pressed=true] .mute { opacity: 0; }
         @media (max-height: 760px) and (min-width: 861px) {
-            .key { height: 50px; } .screen { height: 186px; } .phone-note { display: none; }
+            .key { height: 48px; } .screen { height: 182px; } .phone-note { display: none; } .sound-btn { margin-top: 10px; padding: 6px 16px; }
         }
 
         /* ---------- הפרטים ---------- */
@@ -219,6 +235,47 @@
         .fact { padding: 26px 0; border-top: 1px solid var(--line); }
         .fact h3 { font-size: 24px; font-weight: 700; margin-bottom: 6px; }
         .fact p { color: var(--muted); }
+
+        /* ---------- היכולות: ארבעה טורים עם קווים דקים ---------- */
+        .caps { padding: 56px 7% 84px; }
+        .caps-head { display: grid; grid-template-columns: 1fr 1fr; gap: 7%; align-items: end; padding: 60px 0 40px; }
+        .caps h2 { font-size: clamp(52px, 5.5vw, 86px); }
+        .caps-head p { font-size: clamp(19px, 1.6vw, 23px); line-height: 1.42; color: var(--muted); }
+        .caps-cols { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0 3.5%; }
+        .cap-col { border-top: 1px solid var(--line); padding-top: 20px; }
+        .cap-col .num { font-size: 14px; font-weight: 700; color: var(--accent); }
+        .cap-col h3 { font-size: clamp(26px, 2.3vw, 34px); font-weight: 900; letter-spacing: -0.02em; margin: 4px 0 10px; }
+        .cap-col ul { list-style: none; margin: 0; padding: 0; }
+        .cap-col li { padding: 10px 0; border-top: 1px solid #ffffff17; font-size: 16.5px; line-height: 1.4; color: #b9cae6; }
+        .cap-col li:first-child { border-top: 0; }
+        .cap-col li b { color: var(--fg); font-weight: 700; }
+        @media (max-width: 1100px) and (min-width: 861px) { .caps-cols { grid-template-columns: 1fr 1fr; gap: 30px 6%; } }
+        .caps-swipe { display: none; font-size: 14px; font-weight: 500; color: var(--muted); margin-top: 14px; }
+        .tag-new {
+            display: inline-block; font-size: 11px; font-weight: 700; line-height: 1.6;
+            color: var(--bg); background: var(--amber); border-radius: 20px; padding: 0 8px; margin-inline-start: 6px; vertical-align: 2px;
+        }
+
+        /* ---------- שאלות נפוצות ---------- */
+        .faq { background: var(--paper); color: var(--ink); padding: 56px 7% 84px; }
+        .faq-grid { display: grid; grid-template-columns: 1fr 1.35fr; gap: 7%; align-items: start; padding-top: 60px; }
+        .faq h2 { font-size: clamp(52px, 5.5vw, 86px); }
+        .faq h2 span { color: #1667d9; }
+        .faq details { border-top: 1px solid var(--line-ink); }
+        .faq details:last-child { border-bottom: 1px solid var(--line-ink); }
+        .faq summary {
+            list-style: none; cursor: pointer; padding: 20px 0;
+            display: flex; justify-content: space-between; align-items: center; gap: 20px;
+            font-size: clamp(19px, 1.6vw, 23px); font-weight: 700;
+        }
+        .faq summary::-webkit-details-marker { display: none; }
+        .faq summary b {
+            flex: none; font: 400 24px Arial; width: 38px; height: 38px;
+            border: 1px solid var(--line-ink); border-radius: 50%;
+            display: grid; place-items: center; transition: transform .3s, background .3s;
+        }
+        .faq details[open] summary b { transform: rotate(45deg); background: var(--ink); color: #fff; }
+        .faq details p { padding: 0 0 22px; font-size: 18px; line-height: 1.5; color: var(--muted-ink); max-width: 36em; }
 
         /* ---------- מסלול הדיבור (AI) ---------- */
         .talk { background: var(--pale); color: var(--ink); padding: 56px 7% 84px; }
@@ -307,8 +364,19 @@
             .track { gap: 6px; margin: 18px 0 26px; }
             .track button { font-size: 15px; padding: 7px 12px; }
             .phone-col { max-width: 340px; margin: 0 auto; }
-            .facts, .talk { padding: 38px 7% 60px; }
-            .facts-head, .talk-grid, .finish-grid { grid-template-columns: 1fr; gap: 26px; }
+            .facts, .talk, .caps, .faq { padding: 38px 7% 60px; }
+            .facts-head, .talk-grid, .finish-grid, .caps-head, .faq-grid { grid-template-columns: 1fr; gap: 26px; }
+            .caps-head { padding: 36px 0 26px; }
+            .caps h2, .faq h2 { font-size: clamp(44px, 10.8vw, 64px); }
+            /* בטלפון: ארבעת הטורים מחליקים הצידה, במקום רשימה ארוכה אחת */
+            .caps-cols {
+                display: flex; gap: 6%; overflow-x: auto; scroll-snap-type: x mandatory;
+                margin: 0 -7%; padding: 0 7% 6px; scrollbar-width: none;
+            }
+            .caps-cols::-webkit-scrollbar { display: none; }
+            .cap-col { flex: 0 0 84%; scroll-snap-align: start; }
+            .caps-swipe { display: block; }
+            .faq-grid { padding-top: 36px; }
             .facts-head { padding: 36px 0 26px; }
             .talk-grid { padding-top: 36px; gap: 36px; }
             .facts h2, .talk h2 { font-size: clamp(44px, 10.8vw, 64px); }
@@ -389,19 +457,27 @@
                         <div class="keys" id="keys">
                             <button class="key" data-key="1" data-cursor="הקישו" type="button"><b>1</b><small>גוף המייל</small></button>
                             <button class="key" data-key="2" data-cursor="הקישו" type="button"><b>2</b><small>תשובה בקול</small></button>
-                            <button class="key" data-key="3" data-cursor="הקישו" type="button"><b>3</b><small>סימון כנקרא</small></button>
+                            <button class="key" data-key="3" data-cursor="הקישו" type="button"><b>3</b><small>העברה</small></button>
                             <button class="key" data-key="4" data-cursor="הקישו" type="button"><b>4</b><small>המייל הבא</small></button>
-                            <button class="key idle" data-key="5" type="button" aria-label="5, לא פעיל"><b>5</b></button>
+                            <button class="key" data-key="5" data-cursor="הקישו" type="button"><b>5</b><small>שוב</small></button>
                             <button class="key" data-key="6" data-cursor="הקישו" type="button"><b>6</b><small>המייל הקודם</small></button>
-                            <button class="key" data-key="7" data-cursor="הקישו" type="button"><b>7</b><small>לאשפה</small></button>
-                            <button class="key" data-key="8" data-cursor="הקישו" type="button"><b>8</b><small>פרטי המייל</small></button>
-                            <button class="key" data-key="9" data-cursor="הקישו" type="button"><b>9</b><small>מייל חדש לשולח</small></button>
+                            <button class="key" data-key="7" data-cursor="הקישו" type="button"><b>7</b><small>שרשור</small></button>
+                            <button class="key" data-key="8" data-cursor="הקישו" type="button"><b>8</b><small>פעולות</small></button>
+                            <button class="key" data-key="9" data-cursor="הקישו" type="button"><b>9</b><small>מייל לשולח</small></button>
                             <button class="key idle" data-key="*" type="button" aria-label="כוכבית, לא פעיל"><b>*</b></button>
-                            <button class="key idle" data-key="0" type="button" aria-label="0, לא פעיל"><b>0</b></button>
+                            <button class="key" data-key="0" data-cursor="הקישו" type="button"><b>0</b><small>תשובה מהירה</small></button>
                             <button class="key idle" data-key="#" type="button" aria-label="סולמית, לא פעיל"><b>#</b></button>
                         </div>
                     </div>
-                    <p class="phone-note">מיילים לדוגמה. בשיחה אמיתית שומעים הכול בקול.</p>
+                    <button class="sound-btn" id="sound-toggle" type="button" aria-pressed="false" data-cursor="קול">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M11 5 6 9H3v6h3l5 4z" fill="currentColor"/>
+                            <path class="wave" d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/>
+                            <path class="mute" d="m16 9 5 6m0-6-5 6"/>
+                        </svg>
+                        <span>הפעלת קול</span>
+                    </button>
+                    <p class="phone-note">מיילים לדוגמה, בקול האמיתי של הקו.</p>
                 </div>
                 <div class="track">
                     <button data-phase="0" aria-pressed="true" data-cursor="בחרו">להאזין</button>
@@ -409,24 +485,68 @@
                     <button data-phase="1" aria-pressed="false" data-cursor="בחרו">לענות</button>
                     <i><b></b></i>
                     <button data-phase="2" aria-pressed="false" data-cursor="בחרו">לכתוב</button>
+                    <i><b></b></i>
+                    <button data-phase="3" aria-pressed="false" data-cursor="בחרו">להתעדכן</button>
                 </div>
             </div>
         </section>
 
-        <section class="facts" id="facts" data-tone="dark">
-            <div class="section-top"><span>הפרטים</span><span>מה שקורה מאחורי הקו</span></div>
-            <div class="facts-head">
-                <h2 class="reveal">בנוי לשימוש<br><span class="blue">של כל יום.</span></h2>
-                <p class="reveal">לא הדגמה נוצצת. כלי שמתקשרים אליו בבוקר, בדרך, ובין מנחה למעריב.</p>
+        <!-- כל היכולות, בארבעה טורים לפי מה שעושים עם מייל -->
+        <section class="caps" id="caps" data-tone="dark">
+            <div class="section-top"><span>היכולות</span><span>כל מה שאפשר לעשות מהטלפון</span></div>
+            <div class="caps-head">
+                <h2 class="reveal">כל המייל.<br><span class="blue">בכמה מקשים.</span></h2>
+                <p class="reveal">שומעים, עונים, כותבים ומתעדכנים. בכל שלב המערכת אומרת מה אפשר להקיש, כך שלא צריך לזכור כלום בעל פה.</p>
             </div>
-            <div class="facts-list">
-                <div class="fact reveal"><h3>בלי המתנה על הקו</h3><p>המיילים מוכנים להשמעה מראש, עוד לפני שהתקשרתם. מקישים ושומעים מיד.</p></div>
-                <div class="fact reveal"><h3>מייל ארוך? שומעים תקציר</h3><p>במקום להאזין דקות ארוכות, מייל ארוך מוקרא כתקציר קצר וברור.</p></div>
-                <div class="fact reveal"><h3>התשובה נכתבת כמו שאמרתם</h3><p>ההקלטה הופכת לטקסט מסודר, בלי תוספות. שומעים אותו לפני השליחה ורק אז מאשרים.</p></div>
-                <div class="fact reveal"><h3>שובת בשבת ובחג</h3><p>המערכת לא פועלת בשבת ובחג. במוצאי שבת היא משלימה את המיילים שהגיעו בינתיים.</p></div>
-                <div class="fact reveal"><h3>רק מהטלפון שלכם</h3><p>הכניסה לתיבה פתוחה רק למספר הטלפון שהגדרתם. מתקשר אחר לא שומע דבר.</p></div>
-                <div class="fact reveal"><h3>עובד עם Gmail</h3><p>מתחבר לתיבת ה-Gmail הקיימת שלכם. תשובה נכנסת לאותה שרשרת מיילים, כמו במחשב.</p></div>
+            <div class="caps-cols">
+                <div class="cap-col reveal">
+                    <span class="num">01</span>
+                    <h3>להאזין</h3>
+                    <ul>
+                        <li><b>כמה מיילים חדשים</b> מאז השיחה הקודמת, כבר בכניסה</li>
+                        <li><b>ממי ובאיזה נושא</b>, ורק אם רוצים - את כל המייל</li>
+                        <li><b>מייל ארוך</b> מוקרא כתקציר קצר וברור</li>
+                        <li><b>מייל באנגלית</b> מוקרא בעברית<span class="tag-new">חדש</span></li>
+                        <li><b>שרשור שלם</b> מההתחלה, הודעה אחרי הודעה<span class="tag-new">חדש</span></li>
+                        <li><b>פרסומות ועדכונים</b>: שומעים רק את הנושא</li>
+                    </ul>
+                </div>
+                <div class="cap-col reveal">
+                    <span class="num">02</span>
+                    <h3>לענות</h3>
+                    <ul>
+                        <li><b>תשובה בקול</b>, שנכתבת כטקסט מסודר ומוקראת לאישור</li>
+                        <li><b>תשובות מהירות</b> מוכנות מראש, בהקשה אחת<span class="tag-new">חדש</span></li>
+                        <li><b>צירוף ההקלטה</b> הקולית עצמה למייל</li>
+                        <li><b>העברת מייל</b> הלאה, עם הקבצים המצורפים</li>
+                        <li><b>מייל חדש לשולח</b>, ישר מתוך המייל שלו</li>
+                    </ul>
+                </div>
+                <div class="cap-col reveal">
+                    <span class="num">03</span>
+                    <h3>לכתוב</h3>
+                    <ul>
+                        <li><b>הקלדת כתובת</b> במקשים, או <b>אמירת שם</b> מאנשי הקשר</li>
+                        <li><b>חיוג מקוצר</b>: מקש אחד לכל אדם קבוע</li>
+                        <li><b>עד עשרה נמענים</b> במייל אחד</li>
+                        <li><b>מייל לעצמכם</b>, בתור תזכורת</li>
+                        <li><b>המיילים ששלחתם</b>, בשלוחה נפרדת</li>
+                        <li>המייל יוצא <b>מעוצב ומחולק לשורות</b></li>
+                    </ul>
+                </div>
+                <div class="cap-col reveal">
+                    <span class="num">04</span>
+                    <h3>להתעדכן ולסדר</h3>
+                    <ul>
+                        <li><b>צינתוק</b> כשמגיע מייל מאדם שבחרתם<span class="tag-new">חדש</span></li>
+                        <li><b>רק המיילים</b> מאדם אחד, בלי כל השאר</li>
+                        <li><b>סימון כנקרא</b> והעברה לאשפה</li>
+                        <li><b>שמירת השולח</b> באנשי הקשר</li>
+                        <li><b>שלוחת עדכונים</b> שמסבירה בקול מה חדש במערכת</li>
+                    </ul>
+                </div>
             </div>
+            <p class="caps-swipe">החליקו לצד לעוד יכולות ←</p>
         </section>
 
         <!-- מסלול הדיבור החופשי, עם בינה מלאכותית -->
@@ -443,6 +563,52 @@
                     <div class="bubble reveal">"סכם לי את המיילים מהיום"</div>
                     <div class="bubble reveal">"קרא לי את המייל האחרון"</div>
                     <div class="bubble reveal">"שלח מייל לפלוני ש..."</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="facts" id="facts" data-tone="dark">
+            <div class="section-top"><span>הפרטים</span><span>מה שקורה מאחורי הקו</span></div>
+            <div class="facts-head">
+                <h2 class="reveal">בנוי לשימוש<br><span class="blue">של כל יום.</span></h2>
+                <p class="reveal">לא הדגמה נוצצת. כלי שמתקשרים אליו בבוקר, בדרך, ובין מנחה למעריב.</p>
+            </div>
+            <div class="facts-list">
+                <div class="fact reveal"><h3>בלי המתנה על הקו</h3><p>כדקה אחרי שמייל מגיע, הוא כבר מוקלט ומחכה. מקישים ושומעים מיד.</p></div>
+                <div class="fact reveal"><h3>מייל ארוך? שומעים תקציר</h3><p>במקום להאזין דקות ארוכות, מייל ארוך מוקרא כתקציר קצר וברור.</p></div>
+                <div class="fact reveal"><h3>התשובה נכתבת כמו שאמרתם</h3><p>ההקלטה הופכת לטקסט מסודר, בלי תוספות. שומעים אותו לפני השליחה ורק אז מאשרים.</p></div>
+                <div class="fact reveal"><h3>שובת בשבת ובחג</h3><p>המערכת לא פועלת בשבת ובחג. במוצאי שבת היא משלימה את המיילים שהגיעו בינתיים.</p></div>
+                <div class="fact reveal"><h3>רק מהטלפון שלכם</h3><p>הכניסה לתיבה פתוחה רק למספר הטלפון שהגדרתם. מתקשר אחר לא שומע דבר.</p></div>
+                <div class="fact reveal"><h3>עובד עם Gmail</h3><p>מתחבר לתיבת ה-Gmail הקיימת שלכם. תשובה נכנסת לאותה שרשרת מיילים, כמו במחשב.</p></div>
+            </div>
+        </section>
+
+        <!-- שאלות נפוצות: נפתחות בלחיצה -->
+        <section class="faq" id="faq" data-tone="light">
+            <div class="section-top"><span>שאלות</span><span>מה שואלים אותנו</span></div>
+            <div class="faq-grid">
+                <h2 class="reveal">שאלות.<br><span>ותשובות קצרות.</span></h2>
+                <div class="faq-list reveal">
+                    <details>
+                        <summary data-cursor="פתחו">צריך אינטרנט, אפליקציה או טלפון חכם? <b aria-hidden="true">+</b></summary>
+                        <p>לא. מתקשרים למספר טלפון רגיל, מכל טלפון כשר, ומשתמשים במקשים. כל העבודה נעשית מאחורי הקו.</p>
+                    </details>
+                    <details>
+                        <summary data-cursor="פתחו">מה רואה מי שמקבל ממני מייל? <b aria-hidden="true">+</b></summary>
+                        <p>מייל רגיל ומסודר: הטקסט מחולק לשורות, עם חתימה בתחתית. אפשר לצרף גם את ההקלטה הקולית עצמה, כדי שישמע אתכם.</p>
+                    </details>
+                    <details>
+                        <summary data-cursor="פתחו">איך יודעים שהגיע מייל חשוב? <b aria-hidden="true">+</b></summary>
+                        <p>בוחרים אנשים לצינתוק. כשמגיע מהם מייל, הטלפון מצלצל לרגע, ובשלוחת העדכונים שומעים ממי הוא הגיע.</p>
+                    </details>
+                    <details>
+                        <summary data-cursor="פתחו">ואם אני לא זוכר את המקשים? <b aria-hidden="true">+</b></summary>
+                        <p>לא צריך לזכור. בכל שלב המערכת אומרת מה אפשר להקיש. ואחרי כל עדכון, שלוחת העדכונים מסבירה בקול מה חדש.</p>
+                    </details>
+                    <details>
+                        <summary data-cursor="פתחו">מה אם טעיתי בהקלטה? <b aria-hidden="true">+</b></summary>
+                        <p>שום דבר לא נשלח בלי אישור. לפני כל שליחה שומעים את מה שנכתב, ואפשר להקליט מחדש או לבטל.</p>
+                    </details>
                 </div>
             </div>
         </section>
@@ -555,122 +721,375 @@
         });
 
         // ---------- הדגמת הטלפון ----------
-        // מיילים לדוגמה בלבד. המקשים זהים למקשים שבשלוחת ההאזנה האמיתית.
+        // AUDIO-TEXTS-START
+        // ✏️ כל מה שהטלפון "אומר" בהדגמה. כל משפט כאן מוקלט מראש בקול של הקו, בתיקייה audio.
+        // אחרי שינוי נוסח צריך להפיק מחדש את ההקלטות (C:\Users\user1\mail-phone-site-tools\make-audio.mjs).
+        // משפט בלי הקלטה מוצג על המסך, אבל לא נשמע.
+        // מיילים לדוגמה בלבד. המקשים זהים למקשים שבשלוחת ההאזנה האמיתית (8/1).
         const SAMPLE_MAILS = [
             {
                 from: 'משה כהן', subject: 'הצעת מחיר להדפסת ההזמנות',
                 body: 'שלום, מצרף את הצעת המחיר להדפסת חמש מאות הזמנות. המחיר כולל משלוח עד הבית. אשמח לאישור עד יום חמישי.',
-                details: 'המייל נשלח ביום שלישי, בשעה 14:32. כתובת השולח: moshe, שטרודל, ג\'ימייל נקודה קום.'
+                details: 'המייל נשלח ביום שלישי, בשעה 14:32. כתובת השולח: moshe, שטרודל, ג\'ימייל נקודה קום.',
+                thread: [
+                    'ממך, ביום ראשון: שלום משה, אפשר לקבל הצעת מחיר להדפסת חמש מאות הזמנות?',
+                    'מאת משה כהן, ביום שני: בשמחה. אבדוק מול בית הדפוס, ואחזור אליך מחר.',
+                    'מאת משה כהן, ביום שלישי: שלום, מצרף את הצעת המחיר. המחיר כולל משלוח עד הבית.'
+                ]
             },
             {
-                from: 'ועד הבניין', subject: 'תיקון המעלית ביום ראשון',
-                body: 'לדיירים שלום. ביום ראשון בין תשע לאחת תושבת המעלית לצורך תיקון. תודה על הסבלנות.',
-                details: 'המייל נשלח ביום שני, בשעה 20:10. כתובת השולח: vaad, שטרודל, ג\'ימייל נקודה קום.'
+                from: 'דניאל בראון', subject: 'פגישה ביום רביעי',
+                body: 'המייל תורגם מאנגלית. שלום, אשמח לקבוע פגישה ביום רביעי בעשר בבוקר. אם השעה לא מתאימה, אפשר להציע שעה אחרת. תודה, דניאל.',
+                details: 'המייל נשלח ביום שני, בשעה 08:15. כתובת השולח: daniel, שטרודל, ג\'ימייל נקודה קום.'
             },
             {
                 from: 'הנהלת החשבונות', subject: 'החשבונית לחודש תשרי',
                 body: 'תקציר המייל: החשבונית לחודש תשרי מוכנה. הסכום לתשלום זהה לחודש הקודם, והמועד האחרון הוא סוף החודש.',
                 details: 'המייל נשלח ביום ראשון, בשעה 09:05. כתובת השולח: office, שטרודל, ג\'ימייל נקודה קום.'
+            },
+            {
+                from: 'ועד הבניין', subject: 'תיקון המעלית ביום ראשון',
+                body: 'לדיירים שלום. ביום ראשון בין תשע לאחת תושבת המעלית לצורך תיקון. תודה על הסבלנות.',
+                details: 'המייל נשלח ביום חמישי, בשעה 20:10. כתובת השולח: vaad, שטרודל, ג\'ימייל נקודה קום.'
+            },
+            {
+                from: 'חנות הספרים', subject: 'מבצע סוף עונה',
+                body: 'זה מייל פרסומי, ולכן התוכן שלו לא מוקרא.',
+                details: 'המייל נשלח ביום חמישי, בשעה 07:40. כתובת השולח: news, שטרודל, ספרים נקודה קום.'
             }
         ];
+        const QUICK_REPLIES = ['קיבלתי, תודה.', 'אחזור אליך בהקדם.', 'מאשר.'];
+        const SAY = {
+            newCount: 'יש לך חמישה מיילים חדשים מאז השיחה הקודמת.',
+            threadHint: 'המייל הזה הוא חלק משרשור. לשמיעת השרשור מתחילתו הקישו 7.',
+            notThread: 'המייל הזה לא חלק משרשור.',
+            threadStart: 'השרשור מתחילתו.',
+            threadEnd: 'זו ההודעה האחרונה בשרשור. לחזרה למייל הקישו 0.',
+            threadFirst: 'זו ההודעה הראשונה בשרשור.',
+            back: 'חזרה למייל.',
+            lastMail: 'זה המייל האחרון ברשימה.',
+            firstMail: 'זה המייל החדש ביותר.',
+            noMore: 'אין מיילים נוספים.',
+            inactive: 'המקש הזה לא פעיל כאן.',
+            record: 'הקליטו את התשובה אחרי הצליל, ובסיום הקישו סולמית.',
+            draft: 'זו התשובה שלכם: קיבלתי, תודה רבה. מאשר את ההזמנה. לשליחה הקישו 1. לשליחה עם ההקלטה הקולית הקישו 4.',
+            confirmMenu: 'לשליחה הקישו 1. להקלטה מחדש הקישו 2. לביטול הקישו 3. לשליחה עם ההקלטה הקולית הקישו 4.',
+            replyCancel: 'התשובה בוטלה.',
+            quickMenu: 'תשובות מהירות. לתשובה קיבלתי, תודה, הקישו 1. לתשובה אחזור אליך בהקדם, הקישו 2. לתשובה מאשר, הקישו 3.',
+            quickCancel: 'התשובה המהירה בוטלה.',
+            forward: 'העברת המייל, כולל הקבצים המצורפים. להקלדת כתובת הקישו 1. לבחירה מאנשי הקשר הקישו 2. מהחיוג המקוצר הקישו 3.',
+            forwarded: 'המייל הועבר אל דוד לוי, עם הקבצים המצורפים.',
+            actions: 'לפרטי המייל הקישו 1. לסימון כנקרא 2. לאנשי הקשר 3. לחיוג המקוצר 4. לאשפה 5. לצינתוק על השולח 6. למיילים רק ממנו 7. לחזרה 0.',
+            markedRead: 'המייל סומן כנקרא.',
+            contactSaved: 'נשמר באנשי הקשר.',
+            trashed: 'המייל הועבר לאשפה.',
+            // כתיבת מייל בחיוג המקוצר (השלב השלישי)
+            mainMenu: 'להאזנה למיילים הקישו 1. לכתיבת מייל חדש הקישו 2. למיילים ששלחתם הקישו 3. לחיוג המקוצר הקישו 4.',
+            speedMenu: 'חיוג מקוצר. לעצמך הקישו 1. למשה כהן הקישו 2. לוועד הבניין הקישו 3.',
+            moreTo1: 'משה כהן. להוספת נמען נוסף הקישו 1. להמשך לנושא המייל הקישו 2.',
+            addMode: 'הוספת נמען. להקלדת כתובת המייל הקישו 1. לבחירה מאנשי הקשר הקישו 2.',
+            sayName: 'אמרו את שם איש הקשר אחרי הצליל.',
+            found: 'נמצא: דוד לוי. לאישור הקישו 1.',
+            moreTo2: 'דוד לוי נוסף. להוספת נמען נוסף הקישו 1. להמשך לנושא המייל הקישו 2.',
+            willSend: 'המייל יישלח אל משה כהן, ואל דוד לוי. הקליטו את נושא המייל, ואחריו את התוכן.',
+            composeConfirm: 'זה המייל שלכם, בנושא: הזמנת ההדפסה. שלום, מאשרים את ההצעה. לשליחה הקישו 1. להקלטה מחדש הקישו 2. לביטול הקישו 3.',
+            composeSent: 'המייל נשלח אל משה כהן ואל דוד לוי.'
+        };
+        // משפטים שתלויים במייל - מוקלטים לכל אחד מהמיילים לדוגמה
+        const SAY_MAIL = {
+            replySent: (m) => 'התשובה נשלחה אל ' + m.from + '.',
+            quickSent: (m) => 'התשובה המהירה נשלחה אל ' + m.from + '.',
+            toSender: (m) => 'מייל חדש אל ' + m.from + '. הקליטו את נושא המייל אחרי הצליל.',
+            speedAdded: (m) => m.from + ' נוסף לחיוג המקוצר.',
+            alertOn: (m) => 'מעכשיו, כשיגיע מייל מאת ' + m.from + ', תקבלו צינתוק.',
+            filterOn: (m) => 'מעכשיו שומעים רק את המיילים מאת ' + m.from + '.',
+            newMail: (m) => 'הגיע מייל חדש מאת ' + m.from + '.'
+        };
+        const sayQuick = (q) => 'התשובה שתישלח: ' + q + ' לאישור הקישו 1. לביטול הקישו 0.';
+        const announce = (m) => 'מאת ' + m.from + ', בנושא: ' + m.subject + '.';
+        // כל המשפטים שיש להם הקלטה. גם סקריפט ההפקה משתמש בפונקציה הזו.
+        function speechTexts() {
+            const out = [];
+            const add = (v) => { if (Array.isArray(v)) v.forEach(add); else if (v) out.push(v); };
+            Object.values(SAY).forEach(add);
+            QUICK_REPLIES.forEach((q) => add(sayQuick(q)));
+            SAMPLE_MAILS.forEach((m) => {
+                add([announce(m), m.body, m.details, m.thread || []]);
+                Object.values(SAY_MAIL).forEach((f) => add(f(m)));
+            });
+            return [...new Set(out)];
+        }
+        // שם הקובץ של כל משפט: טביעת אצבע קצרה של הטקסט (אותה פונקציה בסקריפט ההפקה)
+        function speechId(text) {
+            let h = 0x811c9dc5;
+            for (let i = 0; i < text.length; i++) { h ^= text.charCodeAt(i); h = Math.imul(h, 0x01000193); }
+            return (h >>> 0).toString(16).padStart(8, '0');
+        }
+        // AUDIO-TEXTS-END
+
+        // ---------- קול: הקלטות בקול של הקו, וצלילי המקשים ----------
+        const SPOKEN = new Set(speechTexts());
+        const sound = { on: false, ctx: null, player: new Audio(), queue: [], playing: false, endedAt: 0, warmed: false, token: 0 };
+        sound.player.preload = 'auto';
+        function speak(parts) {
+            sound.queue = sound.on ? parts.filter((p) => SPOKEN.has(p)) : [];
+            sound.player.pause();
+            sound.playing = false;
+            playNext();
+        }
+        // token: מספר ההשמעה הנוכחית, כדי שתקלה בהשמעה ישנה (שהופסקה) לא תדלג על משפט חדש
+        function playNext() {
+            const text = sound.queue.shift();
+            const token = ++sound.token;
+            if (!text) {
+                if (sound.playing) { sound.endedAt = performance.now(); screenEl.classList.remove('talking'); }
+                sound.playing = false;
+                return;
+            }
+            sound.playing = true;
+            sound.player.src = 'audio/' + speechId(text) + '.mp3';
+            sound.player.play().catch(() => { if (token === sound.token) playNext(); });
+        }
+        sound.player.addEventListener('ended', () => playNext());
+        sound.player.addEventListener('error', () => { const t = sound.token; setTimeout(() => { if (t === sound.token) playNext(); }, 0); });
+        // האם הטלפון עוד "מדבר" (ההדגמה האוטומטית מחכה שיסיים)
+        const speaking = () => sound.on && (sound.playing || performance.now() - sound.endedAt < 450);
+        // טעינה מוקדמת של ההקלטות, כדי שלא יהיו הפסקות בין משפטים
+        function warmUp() {
+            if (sound.warmed) return;
+            sound.warmed = true;
+            [...SPOKEN].forEach((t, i) => setTimeout(() => fetch('audio/' + speechId(t) + '.mp3').catch(() => {}), i * 40));
+        }
+        function audioCtx() {
+            if (!sound.ctx) { const AC = window.AudioContext || window.webkitAudioContext; if (AC) sound.ctx = new AC(); }
+            if (sound.ctx && sound.ctx.state === 'suspended') sound.ctx.resume();
+            return sound.ctx;
+        }
+        // צליל אמיתי של מקש בטלפון: שני תדרים ביחד (DTMF)
+        const DTMF = { 1: [697, 1209], 2: [697, 1336], 3: [697, 1477], 4: [770, 1209], 5: [770, 1336], 6: [770, 1477], 7: [852, 1209], 8: [852, 1336], 9: [852, 1477], '*': [941, 1209], 0: [941, 1336], '#': [941, 1477] };
+        function beep(freqs, start, length, volume) {
+            const ac = audioCtx();
+            if (!ac) return;
+            const t = ac.currentTime + start, gain = ac.createGain();
+            gain.gain.setValueAtTime(0, t);
+            gain.gain.linearRampToValueAtTime(volume, t + 0.012);
+            gain.gain.setValueAtTime(volume, t + length - 0.03);
+            gain.gain.linearRampToValueAtTime(0, t + length);
+            gain.connect(ac.destination);
+            freqs.forEach((f) => { const o = ac.createOscillator(); o.frequency.value = f; o.connect(gain); o.start(t); o.stop(t + length + 0.02); });
+        }
+        function keyTone(key) { if (sound.on && DTMF[key]) beep(DTMF[key], 0, 0.16, 0.09); }
+        // צינתוק: הטלפון רועד, ובקול - צלצול קצר
+        function ringPhone() {
+            const phone = $('.phone');
+            phone.classList.remove('ringing'); void phone.offsetWidth; phone.classList.add('ringing');
+            if (sound.on) { beep([440, 480], 0, 0.9, 0.07); beep([440, 480], 1.2, 0.9, 0.07); }
+        }
+
         const MENU_PROMPT = 'הקישו מקש כדי להמשיך';
-        const CONFIRM_PROMPT = '1 שליחה · 2 הקלטה מחדש · 3 ביטול';
+        const CONFIRM_PROMPT = '1 שליחה · 2 הקלטה מחדש · 3 ביטול · 4 עם ההקלטה';
+        // התוויות הקטנות על המקשים מתחלפות לפי התפריט שבו נמצאים, כמו בשיחה אמיתית
+        const KEY_LABELS = {
+            menu: { 1: 'גוף המייל', 2: 'תשובה בקול', 3: 'העברה', 4: 'המייל הבא', 5: 'שוב', 6: 'המייל הקודם', 7: 'שרשור', 8: 'פעולות', 9: 'מייל לשולח', 0: 'תשובה מהירה' },
+            actions: { 1: 'פרטי המייל', 2: 'נקרא', 3: 'אנשי קשר', 4: 'חיוג מקוצר', 5: 'אשפה', 6: 'צינתוק', 7: 'רק ממנו', 0: 'חזרה' },
+            confirm: { 1: 'שליחה', 2: 'הקלטה מחדש', 3: 'ביטול', 4: 'עם ההקלטה' },
+            quick: { 1: 'קיבלתי, תודה', 2: 'אחזור אליך', 3: 'מאשר', 0: 'חזרה' },
+            quickConfirm: { 1: 'אישור', 0: 'ביטול' },
+            forward: { 1: 'הקלדה', 2: 'אנשי קשר', 3: 'חיוג מקוצר' },
+            thread: { 4: 'הבאה', 5: 'שוב', 6: 'הקודמת', 0: 'חזרה' },
+            plain: { 1: '-', 2: '-', 3: '-', 4: '-', 5: '-', 6: '-', 7: '-', 8: '-', 9: '-', 0: '-' }
+        };
+        const KEY_NAMES = { '*': 'כוכבית', '#': 'סולמית' };
 
         const screenEl = $('#screen'), stageEl = $('#stage'), heardEl = $('#heard'), promptEl = $('#prompt'), keysEl = $('#keys');
-        let mails, index, mode;           // mode: menu = תפריט ההאזנה, confirm = אישור תשובה שהוקלטה
+        let mails, index, mode, threadAt, quickPick;
         let talkTimer = null, replyTimer = null;
-        const announce = (m) => 'מאת ' + m.from + ', בנושא: ' + m.subject + '.';
+        const heading = (m) => m.thread ? [announce(m), SAY.threadHint] : [announce(m)];
 
-        function resetCall() { mails = SAMPLE_MAILS.slice(); index = 0; mode = 'menu'; clearTimeout(replyTimer); }
+        function setMode(m) {
+            mode = m;
+            const labels = KEY_LABELS[m] || {};
+            keysEl.querySelectorAll('.key').forEach((button) => {
+                const key = button.dataset.key, label = labels[key];
+                let small = button.querySelector('small');
+                if (label) {
+                    if (!small) { small = document.createElement('small'); button.append(small); }
+                    small.textContent = label;
+                    button.classList.remove('idle');
+                    button.removeAttribute('aria-label');
+                    button.dataset.cursor = 'הקישו';
+                } else {
+                    if (small) small.remove();
+                    button.classList.add('idle');
+                    button.setAttribute('aria-label', (KEY_NAMES[key] || key) + ', לא פעיל');
+                    delete button.dataset.cursor;
+                }
+            });
+        }
+        function clearReply() { clearTimeout(replyTimer); replyTimer = null; }
+        function resetCall() { mails = SAMPLE_MAILS.slice(); index = 0; threadAt = 0; clearReply(); setMode('menu'); }
 
+        // מה שהטלפון "אומר": מוצג על המסך, ואם הקול פועל - גם נשמע
         function say(stage, text, prompt) {
+            const parts = [].concat(text);
             stageEl.textContent = stage;
-            heardEl.textContent = text;
+            heardEl.textContent = parts.join(' ');
+            heardEl.classList.toggle('long', heardEl.textContent.length > 105);
             promptEl.textContent = prompt || '';
             heardEl.classList.remove('swap');
             void heardEl.offsetWidth;   // מפעיל מחדש את האנימציה
             heardEl.classList.add('swap');
             screenEl.classList.add('talking');
+            speak(parts);
             clearTimeout(talkTimer);
-            talkTimer = setTimeout(() => screenEl.classList.remove('talking'), 2200);
+            talkTimer = setTimeout(() => { if (!sound.playing) screenEl.classList.remove('talking'); }, 2200);
         }
 
         function recordReply() {
-            mode = 'confirm';
-            say('תשובה בהקלטה', 'הקליטו את התשובה אחרי הצליל...', '');
-            replyTimer = setTimeout(() => {
-                say('תשובה בהקלטה', 'זו התשובה שלכם: "קיבלתי, תודה רבה. מאשר את ההזמנה." לשליחה הקישו 1.', CONFIRM_PROMPT);
-            }, 1700);
+            setMode('confirm');
+            say('תשובה בהקלטה', SAY.record, '');
+            replyTimer = setTimeout(function draft() {
+                if (speaking()) { replyTimer = setTimeout(draft, 250); return; }
+                replyTimer = null;
+                say('תשובה בהקלטה', SAY.draft, CONFIRM_PROMPT);
+            }, 1900);
         }
 
-        // תפריט ההאזנה - כמו בשיחה אמיתית
+        // התפריטים - כמו בשיחה אמיתית
         function pressKey(key) {
-            clearTimeout(replyTimer);
-            if (!mails.length) { resetCall(); say('מייל חדש', announce(mails[0]), MENU_PROMPT); return; }
+            clearReply();
+            if (!mails.length) { resetCall(); say('מייל חדש', heading(mails[0]), MENU_PROMPT); return; }
             const mail = mails[index];
+            const backToMail = (stage, first) => { setMode('menu'); say(stage, [].concat(first || [], heading(mail)), MENU_PROMPT); };
 
             if (mode === 'confirm') {
-                if (key === '1') { mode = 'menu'; say('תשובה בהקלטה', 'התשובה נשלחה אל ' + mail.from + '.', MENU_PROMPT); }
-                else if (key === '2') { recordReply(); }
-                else if (key === '3') { mode = 'menu'; say('תשובה בהקלטה', 'התשובה בוטלה.', MENU_PROMPT); }
-                else { say('תשובה בהקלטה', 'לשליחה הקישו 1. להקלטה מחדש הקישו 2. לביטול הקישו 3.', CONFIRM_PROMPT); }
+                if (key === '1' || key === '4') { setMode('menu'); say('תשובה בהקלטה', SAY_MAIL.replySent(mail), MENU_PROMPT); }
+                else if (key === '2') recordReply();
+                else if (key === '3') { setMode('menu'); say('תשובה בהקלטה', SAY.replyCancel, MENU_PROMPT); }
+                else say('תשובה בהקלטה', SAY.confirmMenu, CONFIRM_PROMPT);
                 return;
             }
+            if (mode === 'quick') {
+                if (QUICK_REPLIES[+key - 1]) { quickPick = QUICK_REPLIES[+key - 1]; setMode('quickConfirm'); say('תשובה מהירה', sayQuick(quickPick), '1 אישור · 0 ביטול'); }
+                else if (key === '0') backToMail('תשובה מהירה', SAY.back);
+                else say('תשובה מהירה', SAY.quickMenu, '');
+                return;
+            }
+            if (mode === 'quickConfirm') {
+                setMode('menu');
+                say('תשובה מהירה', key === '1' ? SAY_MAIL.quickSent(mail) : SAY.quickCancel, MENU_PROMPT);
+                return;
+            }
+            if (mode === 'forward') {
+                if (['1', '2', '3'].includes(key)) { setMode('menu'); say('העברה', SAY.forwarded, MENU_PROMPT); }
+                else say('העברה', SAY.forward, '');
+                return;
+            }
+            if (mode === 'thread') {
+                const thread = mail.thread;
+                if (key === '4') { if (threadAt < thread.length - 1) say('שרשור', thread[++threadAt], ''); else say('שרשור', SAY.threadEnd, ''); }
+                else if (key === '6') { if (threadAt > 0) say('שרשור', thread[--threadAt], ''); else say('שרשור', SAY.threadFirst, ''); }
+                else if (key === '5') say('שרשור', thread[threadAt], '');
+                else if (key === '0') backToMail('שרשור', SAY.back);
+                else say('שרשור', SAY.inactive, '');
+                return;
+            }
+            if (mode === 'actions') {
+                switch (key) {
+                    case '1': say('פרטי המייל', mail.details, ''); break;
+                    case '2': setMode('menu'); say('פעולות', SAY.markedRead, MENU_PROMPT); break;
+                    case '3': setMode('menu'); say('פעולות', SAY.contactSaved, MENU_PROMPT); break;
+                    case '4': setMode('menu'); say('פעולות', SAY_MAIL.speedAdded(mail), MENU_PROMPT); break;
+                    case '5':
+                        setMode('menu');
+                        mails.splice(index, 1);
+                        if (index >= mails.length) index = Math.max(0, mails.length - 1);
+                        if (mails.length) say('אשפה', [SAY.trashed].concat(heading(mails[index])), MENU_PROMPT);
+                        else say('אשפה', [SAY.trashed, SAY.noMore], 'הקישו מקש כדי להתחיל מחדש');
+                        break;
+                    case '6': setMode('menu'); say('צינתוק', SAY_MAIL.alertOn(mail), MENU_PROMPT); break;
+                    case '7':
+                        setMode('menu');
+                        mails = mails.filter((m) => m.from === mail.from); index = 0;
+                        say('סינון', [SAY_MAIL.filterOn(mail)].concat(heading(mails[0])), MENU_PROMPT);
+                        break;
+                    case '0': backToMail('פעולות', SAY.back); break;
+                    default: say('פעולות', SAY.actions, '');
+                }
+                return;
+            }
+            // התפריט הראשי של המייל
             switch (key) {
                 case '1': say('גוף המייל', mail.body, MENU_PROMPT); break;
                 case '2': recordReply(); break;
-                case '3': say('סימון כנקרא', 'המייל סומן כנקרא.', MENU_PROMPT); break;
+                case '3': setMode('forward'); say('העברה', SAY.forward, ''); break;
                 case '4':
-                    if (index < mails.length - 1) { index++; say('המייל הבא', announce(mails[index]), MENU_PROMPT); }
-                    else say('המייל הבא', 'זה המייל האחרון ברשימה.', MENU_PROMPT);
+                    if (index < mails.length - 1) { index++; say('המייל הבא', heading(mails[index]), MENU_PROMPT); }
+                    else say('המייל הבא', SAY.lastMail, MENU_PROMPT);
                     break;
+                case '5': say('שמיעה חוזרת', [announce(mail), mail.body], MENU_PROMPT); break;
                 case '6':
-                    if (index > 0) { index--; say('המייל הקודם', announce(mails[index]), MENU_PROMPT); }
-                    else say('המייל הקודם', 'זה המייל החדש ביותר.', MENU_PROMPT);
+                    if (index > 0) { index--; say('המייל הקודם', heading(mails[index]), MENU_PROMPT); }
+                    else say('המייל הקודם', SAY.firstMail, MENU_PROMPT);
                     break;
                 case '7':
-                    mails.splice(index, 1);
-                    if (index >= mails.length) index = Math.max(0, mails.length - 1);
-                    if (mails.length) say('אשפה', 'המייל הועבר לאשפה. ' + announce(mails[index]), MENU_PROMPT);
-                    else say('אשפה', 'המייל הועבר לאשפה. אין מיילים נוספים.', 'הקישו מקש כדי להתחיל מחדש');
+                    if (mail.thread) { setMode('thread'); threadAt = 0; say('שרשור', [SAY.threadStart, mail.thread[0]], ''); }
+                    else say('שרשור', SAY.notThread, MENU_PROMPT);
                     break;
-                case '8': say('פרטי המייל', mail.details, MENU_PROMPT); break;
-                case '9': say('מייל חדש לשולח', 'מייל חדש אל ' + mail.from + '. הקליטו את נושא המייל אחרי הצליל.', MENU_PROMPT); break;
-                default: say('תפריט ההאזנה', 'המקש הזה לא פעיל בתפריט ההאזנה.', MENU_PROMPT);
+                case '8': setMode('actions'); say('פעולות', SAY.actions, ''); break;
+                case '9': say('מייל חדש לשולח', SAY_MAIL.toSender(mail), MENU_PROMPT); break;
+                case '0': setMode('quick'); say('תשובה מהירה', SAY.quickMenu, ''); break;
+                default: say('תפריט ההאזנה', SAY.inactive, MENU_PROMPT);
             }
         }
 
-        // ---------- שלושת שלבי השיחה ----------
+        // ---------- ארבעת שלבי השיחה ----------
         // ✏️ כאן משנים את הכותרות והטקסטים של כל שלב, ואת סדר המקשים שהטלפון מדגים לבד.
-        // steps: כל שורה היא מקש אחד. wait = כמה זמן להמתין אחריו (באלפיות שנייה).
-        // בשלב "לכתוב" (plain) המסך מציג את הטקסט שכתוב ב-say, כי זה תפריט אחר (כתיבת מייל חדש).
+        // steps: כל שורה היא מקש אחד. wait = כמה זמן להמתין אחריו (באלפיות שנייה). כשהקול פועל - מחכים גם שהמשפט ייגמר.
+        // שלב plain (כתיבת מייל) מציג את הטקסט שכתוב ב-say, כי זה תפריט אחר. ring = צינתוק.
         const PHASES = [
             {
                 number: '01 — להאזין',
                 title: 'ממי. על מה.<br>ורק אז כל המייל.',
-                copy: 'מקש 1 משמיע את המייל. 4 ו-6 עוברים בין המיילים. 8 אומר מתי נשלח ומאיזו כתובת.',
-                intro: () => ['מייל חדש', announce(mails[0]), 'לשמיעת המייל הקישו 1'],
-                steps: [{ key: '1', wait: 4200 }, { key: '4' }, { key: '1', wait: 4200 }, { key: '8', wait: 4200 }]
+                copy: 'בכניסה שומעים כמה מיילים חדשים יש. 1 משמיע את המייל, 4 ו-6 עוברים ביניהם, 7 משמיע שרשור שלם. מייל באנגלית מוקרא בעברית, ומייל ארוך - כתקציר.',
+                intro: () => ['מייל חדש', [SAY.newCount].concat(heading(mails[0])), 'לשמיעת השרשור הקישו 7'],
+                steps: [{ key: '7', wait: 3800 }, { key: '4' }, { key: '0' }, { key: '4' }, { key: '1', wait: 5200 }]
             },
             {
                 number: '02 — לענות',
-                title: 'אומרים תשובה.<br>שומעים אותה. שולחים.',
-                copy: 'ההקלטה הופכת לטקסט, בלי תוספות. שומעים אותו לפני שמאשרים, ואפשר להקליט מחדש.',
+                title: 'אומרים תשובה.<br>או בוחרים מוכנה.',
+                copy: '2 מקליט תשובה, שהופכת לטקסט מסודר ומוקראת לאישור. 0 שולח תשובה מהירה מוכנה. 3 מעביר את המייל עם הקבצים, ו-9 פותח מייל חדש לשולח.',
                 intro: () => ['מייל חדש', announce(mails[0]), 'להחזרת תשובה הקישו 2'],
-                steps: [{ key: '2', wait: 5200 }, { key: '1', wait: 3600 }]
+                steps: [{ key: '2', wait: 5600 }, { key: '1' }, { key: '0', wait: 4200 }, { key: '1' }, { key: '1', wait: 3600 }]
             },
             {
                 number: '03 — לכתוב',
-                title: 'מייל חדש.<br>לכל כתובת.',
-                copy: 'מקלידים כתובת או אומרים שם מאנשי הקשר. מקליטים נושא ותוכן, שומעים ומאשרים. אפשר גם לכמה נמענים.',
+                title: 'מייל חדש.<br>במקש אחד.',
+                copy: 'מקלידים כתובת, אומרים שם מאנשי הקשר, או מקישים מקש אחד בחיוג המקוצר. עד עשרה נמענים במייל אחד, והמייל יוצא מעוצב ומסודר בשורות.',
                 plain: true,
-                intro: () => ['תפריט ראשי', 'להאזנה למיילים הקישו 1. לכתיבת מייל חדש הקישו 2. למיילים ששלחתם הקישו 3.', ''],
+                intro: () => ['תפריט ראשי', SAY.mainMenu, ''],
                 steps: [
-                    { key: '2', say: ['מייל חדש', 'להקלדת כתובת המייל הקישו 1. לבחירה מאנשי הקשר הקישו 2.', ''] },
-                    { key: '2', say: ['אנשי קשר', 'אמרו את שם איש הקשר אחרי הצליל...', ''], wait: 2200 },
-                    { say: ['אנשי קשר', 'נמצא: משה כהן. לאישור הקישו 1.', ''] },
-                    { key: '1', say: ['נושא ותוכן', 'מקליטים את הנושא, ואחריו את תוכן המייל. כל אחד מוקרא לכם לאישור.', 'לשליחה הקישו 1'], wait: 4200 },
-                    { key: '1', say: ['שליחה', 'המייל נשלח אל משה כהן.', ''], wait: 3600 }
+                    { key: '4', say: ['חיוג מקוצר', SAY.speedMenu, ''] },
+                    { key: '2', say: ['נמענים', SAY.moreTo1, ''] },
+                    { key: '1', say: ['נמען נוסף', SAY.addMode, ''] },
+                    { key: '2', say: ['אנשי קשר', SAY.sayName, ''], wait: 2200 },
+                    { say: ['אנשי קשר', SAY.found, ''] },
+                    { key: '1', say: ['נמענים', SAY.moreTo2, ''] },
+                    { key: '2', say: ['נושא ותוכן', SAY.willSend, ''], wait: 3600 },
+                    { say: ['אישור', SAY.composeConfirm, '1 שליחה · 2 הקלטה מחדש · 3 ביטול'], wait: 4200 },
+                    { key: '1', say: ['שליחה', SAY.composeSent, ''], wait: 3600 }
+                ]
+            },
+            {
+                number: '04 — להתעדכן',
+                title: 'מייל חשוב?<br>הטלפון יודיע.',
+                copy: 'מקישים 8 ואז 6, ומעכשיו כל מייל מהאדם הזה מצנתק לטלפון. באותו תפריט גם מסמנים כנקרא, שומרים באנשי הקשר, מוסיפים לחיוג המקוצר ומעבירים לאשפה.',
+                intro: () => ['מייל חדש', announce(mails[0]), 'לפעולות נוספות הקישו 8'],
+                steps: [
+                    { key: '8', wait: 4600 },
+                    { key: '6', wait: 3800 },
+                    { ring: true, say: ['צינתוק', 'הטלפון מצלצל לרגע: הגיע מייל ממשה כהן.', 'לא צריך לענות. שומעים ממי הגיע בשלוחת העדכונים.'], wait: 3400 },
+                    { say: ['שלוחת העדכונים', SAY_MAIL.newMail(SAMPLE_MAILS[0]), ''], wait: 3600 }
                 ]
             }
         ];
@@ -681,15 +1100,23 @@
         function flash(key) {
             const button = keysEl.querySelector('.key[data-key="' + key + '"]');
             if (!button) return;
+            keyTone(key);
             button.classList.add('lit');
             setTimeout(() => button.classList.remove('lit'), 260);
         }
-        function schedule(ms) {
+        // מפעיל פעולה אחרי המתנה. כשהקול פועל - מחכה גם שהטלפון יסיים לדבר
+        function later(fn, ms) {
             clearTimeout(stepTimer);
-            if (!reducedMotion) stepTimer = setTimeout(tick, ms);
+            if (reducedMotion) return;
+            stepTimer = setTimeout(function go() {
+                if (speaking() || replyTimer) { stepTimer = setTimeout(go, 250); return; }
+                fn();
+            }, ms);
         }
+        const schedule = (ms) => later(tick, ms);
         function runStep(s) {
             if (s.key) flash(s.key);
+            if (s.ring) ringPhone();
             if (s.say) say(...s.say); else pressKey(s.key);
             step++;
         }
@@ -714,6 +1141,7 @@
                 $$('[data-phase]').forEach((el) => el.setAttribute('aria-pressed', +el.dataset.phase === n));
             }
             keysEl.classList.toggle('plain', !!p.plain);
+            if (p.plain) setMode('plain');
             say(...p.intro());
             schedule(2600);
         }
@@ -724,16 +1152,17 @@
                 const s = p.steps[step];
                 if (s && s.key === key) { runStep(s); schedule(s.wait || STEP_WAIT); }
                 else if (!s) startPhase(phase);
-                else { say('כתיבת מייל', 'המקש הזה לא פעיל בשלב הזה.', ''); clearTimeout(stepTimer); if (!reducedMotion) stepTimer = setTimeout(() => startPhase(phase), 4000); }
+                else { say('כתיבת מייל', SAY.inactive, ''); later(() => startPhase(phase), 4000); }
                 return;
             }
             pressKey(key);
-            clearTimeout(stepTimer);
-            if (!reducedMotion) stepTimer = setTimeout(() => startPhase(phase), 9000);
+            later(() => startPhase(phase), 9000);
         }
         keysEl.addEventListener('click', (e) => {
             const button = e.target.closest('.key');
-            if (button) userPress(button.dataset.key);
+            if (!button) return;
+            keyTone(button.dataset.key);
+            userPress(button.dataset.key);
         });
         // אפשר להקיש גם במקלדת המחשב, כשהטלפון מול העיניים (ולא בזמן מילוי הטופס)
         document.addEventListener('keydown', (e) => {
@@ -743,17 +1172,29 @@
             flash(e.key);
             userPress(e.key);
         });
-        // כשהטלפון נכנס למסך, השלב מתחיל מההתחלה
+        // כפתור הקול: הפעלה מתחילה את השלב הנוכחי מההתחלה, כדי לשמוע אותו מתחילתו
+        const soundBtn = $('#sound-toggle');
+        soundBtn.addEventListener('click', () => {
+            sound.on = !sound.on;
+            soundBtn.setAttribute('aria-pressed', sound.on);
+            soundBtn.querySelector('span').textContent = sound.on ? 'השתקה' : 'הפעלת קול';
+            if (sound.on) { audioCtx(); warmUp(); startPhase(Math.max(0, phase)); }
+            else { speak([]); }
+        });
+        // כשהטלפון נכנס למסך, השלב מתחיל מההתחלה. כשהוא יוצא - הקול נעצר
         new IntersectionObserver((entries) => {
             const now = entries[0].isIntersecting;
             if (now && !callInView && phase >= 0) startPhase(phase);
+            if (!now) speak([]);
             callInView = now;
         }, { threshold: 0.05 }).observe(callSection);
 
+        // מיקום הגלילה של כל שלב בתוך החלק הנעוץ (בין 0 להתחלה ל-1 לסוף)
+        const phaseSpot = (n) => n === 0 ? 0.04 : n === PHASES.length - 1 ? 0.96 : (n + 0.5) / PHASES.length;
         $$('[data-phase]').forEach((el) => el.onclick = () => {
             const n = +el.dataset.phase;
             if (smallScreen.matches) { startPhase(n); return; }
-            const top = scrollY + callSection.getBoundingClientRect().top + (callSection.offsetHeight - innerHeight) * [0.05, 0.5, 0.94][n];
+            const top = scrollY + callSection.getBoundingClientRect().top + (callSection.offsetHeight - innerHeight) * phaseSpot(n);
             scrollTo({ top, behavior: reducedMotion ? 'instant' : 'smooth' });
         });
 
@@ -770,9 +1211,9 @@
             if (!smallScreen.matches) {
                 const box = callSection.getBoundingClientRect();
                 const progress = Math.max(0, Math.min(1, -box.top / Math.max(1, box.height - v)));
-                const current = Math.min(2, Math.floor(progress * 3));
+                const current = Math.min(PHASES.length - 1, Math.floor(progress * PHASES.length));
                 if (current !== phase) startPhase(current);
-                $$('.track b').forEach((el, i) => el.style.width = Math.max(0, Math.min(1, progress * 2 - i)) * 100 + '%');
+                $$('.track b').forEach((el, i) => el.style.width = Math.max(0, Math.min(1, progress * (PHASES.length - 1) - i)) * 100 + '%');
             } else {
                 $$('.track b').forEach((el, i) => el.style.width = (phase > i ? 100 : 0) + '%');
             }
