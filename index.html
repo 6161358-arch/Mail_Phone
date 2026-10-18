@@ -329,6 +329,9 @@
             color: var(--muted); font-size: 14px;
         }
         .finish footer .brand strong { font-size: 32px; color: var(--fg); }
+        /* הודעת פרטיות קטנה מתחת לטופס (חובה לפי חוק הגנת הפרטיות) */
+        .form-note { margin-top: 14px; font-size: 13px; line-height: 1.5; color: var(--muted); }
+        .form-note a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
         .finish footer a { color: var(--fg); font-weight: 700; border-bottom: 1px solid var(--line); }
 
         /* כניסה בגלילה */
@@ -645,10 +648,11 @@
                         </select>
                     </div>
                     <label class="consent">
-                        <input type="checkbox" id="marketing-consent" required>
+                        <input type="checkbox" id="marketing-consent">
                         <span>אני מאשר/ת קבלת עדכונים, טיפים והצעות שיווקיות למייל. אפשר להסיר בכל עת.</span>
                     </label>
                     <button class="send" id="submitBtn" type="submit" data-cursor="שלחו">שלחו לי את הפרטים</button>
+                    <p class="form-note">הפרטים נשמרים אצל פשוט. אוטומט. (מייל פון) רק כדי לשלוח לכם את המידע ולחזור אליכם. מסירתם אינה חובה, אבל בלעדיהם לא נוכל לשלוח את המידע. <a href="https://6161358-arch.github.io/Simple._Automatic./privacy.html">מדיניות פרטיות</a></p>
                     <div id="formMessage" class="form-msg" hidden></div>
                 </form>
             </div>
@@ -657,6 +661,7 @@
                 <span class="brand"><strong>מייל <i>פון</i></strong></span>
                 <span>&copy; 2026 מייל פון. המייל שלך, בקול שלך.</span>
                 <span>מבית <a href="https://6161358-arch.github.io/Simple._Automatic./" data-cursor="↗">פשוט. אוטומט.</a></span>
+                <span><a href="https://6161358-arch.github.io/Simple._Automatic./privacy.html">מדיניות פרטיות</a> · <a href="https://6161358-arch.github.io/Simple._Automatic./accessibility.html">הצהרת נגישות</a></span>
             </footer>
         </section>
     </main>
