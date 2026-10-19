@@ -134,6 +134,53 @@
         .story-bottom { display: flex; justify-content: space-between; align-items: center; gap: 24px; font-size: 20px; font-weight: 500; line-height: 1.35; }
         .asterisk { font: 85px/1 Georgia, serif; color: #1667d9; }
 
+        /* ---------- שיחה אמיתית: נגן אחד, תמליל שמתמלא כמו צ'אט ---------- */
+        .listen { padding: 48px 7% 64px; }
+        .listen-grid { display: grid; grid-template-columns: 1fr 1.15fr; gap: 6%; align-items: center; padding-top: 40px; }
+        .listen h2 { font-size: clamp(42px, 4.1vw, 66px); }
+        .listen-lead { font-size: clamp(19px, 1.6vw, 23px); line-height: 1.42; color: var(--muted); margin-top: 22px; max-width: 24em; }
+        .listen-steps { list-style: none; margin: 28px 0 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
+        .listen-steps li { display: flex; align-items: center; gap: 12px; font-size: 18px; font-weight: 500; color: var(--muted); padding: 7px 0; border-top: 1px solid var(--line); transition: color .3s; }
+        .listen-steps li b { width: 30px; height: 30px; flex: none; border-radius: 50%; border: 1px solid var(--line); display: grid; place-items: center; font-size: 14px; transition: background .3s, color .3s, border-color .3s; }
+        .listen-steps li.on { color: var(--fg); }
+        .listen-steps li.on b { background: var(--amber); border-color: var(--amber); color: var(--bg); }
+        .listen-steps li.done b { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+        .player { border: 1px solid var(--line); border-radius: 26px; background: #ffffff08; padding: 20px 20px 16px; }
+        .player.ringing { animation: ring .14s linear 10; }
+        .player-head { display: flex; align-items: center; gap: 16px; }
+        .play-btn {
+            width: 64px; height: 64px; flex: none; border-radius: 50%;
+            background: var(--amber); color: var(--bg); display: grid; place-items: center;
+            box-shadow: 0 0 0 8px #ffb0001f; transition: transform .2s, box-shadow .2s;
+        }
+        .play-btn:hover { transform: scale(1.06); box-shadow: 0 0 0 12px #ffb00026; }
+        .play-btn svg { width: 28px; height: 28px; fill: currentColor; }
+        .play-btn .i-stop { display: none; }
+        .play-btn.playing .i-play { display: none; }
+        .play-btn.playing .i-stop { display: inline; }
+        .player-meta { display: flex; flex-direction: column; line-height: 1.3; }
+        .player-meta strong { font-size: 19px; }
+        .restart-btn { margin-inline-start: auto; padding: 7px 14px; border: 1px solid var(--line); border-radius: 50px; font-size: 14px; font-weight: 700; color: var(--muted); transition: color .2s, border-color .2s; }
+        .restart-btn:hover { color: var(--fg); border-color: var(--fg); }
+        .player-meta span { color: var(--muted); font-size: 15px; font-variant-numeric: tabular-nums; direction: ltr; unicode-bidi: isolate; align-self: flex-start; }
+        .player-bar { height: 4px; background: var(--line); border-radius: 4px; margin: 16px 0 12px; overflow: hidden; }
+        .player-bar span { display: block; height: 100%; width: 0; background: var(--amber); transition: width .4s; }
+        .chat { height: 330px; overflow-y: auto; display: flex; flex-direction: column; gap: 9px; padding: 4px 2px; scroll-behavior: smooth; scrollbar-width: thin; }
+        .chat-empty { margin: auto; text-align: center; color: var(--muted); font-size: 16px; line-height: 1.5; }
+        .msg { max-width: 86%; padding: 10px 15px; border-radius: 18px; font-size: 16.5px; line-height: 1.45; animation: swap .3s ease-out both; }
+        .msg small { display: block; font-size: 12px; font-weight: 700; margin-bottom: 2px; opacity: .75; }
+        .msg.sys { align-self: flex-start; background: #ffffff14; border-radius: 18px 18px 18px 5px; }
+        .msg.you { align-self: flex-end; background: var(--accent); color: var(--bg); border-radius: 18px 18px 5px 18px; }
+        .msg.key { align-self: center; padding: 4px 13px; border-radius: 50px; background: transparent; border: 1px solid var(--amber); color: var(--amber); font-size: 14px; font-weight: 700; }
+        .msg.note { align-self: center; background: transparent; color: var(--muted); font-size: 14px; font-style: italic; padding: 2px 8px; }
+        .msg .tag { display: block; margin-top: 5px; font-size: 12px; font-weight: 700; color: var(--amber); }
+        .msg.speaking { box-shadow: 0 0 0 2px #ffb00055; }
+        .chat-legend { display: flex; gap: 16px; justify-content: center; margin-top: 12px; font-size: 13px; color: var(--muted); }
+        .chat-legend span::before { content: ''; display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-inline-end: 6px; vertical-align: -1px; }
+        .chat-legend .lg-sys::before { background: #ffffff33; }
+        .chat-legend .lg-you::before { background: var(--accent); }
+        .chat-legend .lg-key::before { border: 1px solid var(--amber); }
+
         /* ---------- השיחה: הטלפון נשאר במקום, והגלילה מעבירה בין השלבים ---------- */
         .call { height: 420vh; background: var(--paper); color: var(--ink); }
         .sticky {
@@ -367,7 +414,14 @@
             .track { gap: 6px; margin: 18px 0 26px; }
             .track button { font-size: 15px; padding: 7px 12px; }
             .phone-col { max-width: 340px; margin: 0 auto; }
-            .facts, .talk, .caps, .faq { padding: 38px 7% 60px; }
+            .facts, .talk, .caps, .faq, .listen { padding: 38px 7% 60px; }
+            .listen-grid { grid-template-columns: 1fr; gap: 30px; padding-top: 34px; }
+            .listen h2 { font-size: clamp(44px, 10.8vw, 64px); }
+            .listen-steps { flex-direction: row; flex-wrap: wrap; gap: 6px 14px; }
+            .listen-steps li { border-top: 0; font-size: 15px; padding: 2px 0; }
+            .listen-steps li b { width: 24px; height: 24px; font-size: 12px; }
+            .player { padding: 16px 14px 12px; }
+            .chat { height: 330px; }
             .facts-head, .talk-grid, .finish-grid, .caps-head, .faq-grid { grid-template-columns: 1fr; gap: 26px; }
             .caps-head { padding: 36px 0 26px; }
             .caps h2, .faq h2 { font-size: clamp(44px, 10.8vw, 64px); }
@@ -437,10 +491,46 @@
             </div>
         </section>
 
+        <!-- שיחה אמיתית: לוחצים פעם אחת ושומעים שיחה שלמה, עם תמליל שמתמלא -->
+        <section class="listen" id="listen" data-tone="dark">
+            <div class="section-top"><span>שיחה אמיתית</span><span>בקולות של הקו עצמו</span></div>
+            <div class="listen-grid">
+                <div class="listen-copy">
+                    <p class="eyebrow reveal">לחיצה אחת. בערך דקה.</p>
+                    <h2 class="reveal">שמעו שיחה.<br><span class="blue">מההתחלה עד הסוף.</span></h2>
+                    <p class="listen-lead reveal">ככה זה נשמע כשמתקשרים: שומעים מי כתב, מקבלים תקציר, עונים בקול, ומקבלים צינתוק על מייל חשוב.</p>
+                    <ol class="listen-steps reveal" id="listen-steps">
+                        <li><b>1</b>שומעים ממי ועל מה</li>
+                        <li><b>2</b>מייל ארוך? תקציר</li>
+                        <li><b>3</b>עונים בקול</li>
+                        <li><b>4</b>התשובה נשלחת</li>
+                        <li><b>5</b>צינתוק על מייל חשוב</li>
+                    </ol>
+                </div>
+                <div class="player reveal" id="player">
+                    <div class="player-head">
+                        <button class="play-btn" id="listen-play" type="button" aria-label="השמעת השיחה" data-cursor="נגנו">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path class="i-play" d="M8 5.5v13l11-6.5z"/><path class="i-stop" d="M7 6h3.5v12H7zM13.5 6H17v12h-3.5z"/></svg>
+                        </button>
+                        <div class="player-meta">
+                            <strong id="listen-title">שיחה לדוגמה</strong>
+                            <span id="listen-time">0:00</span>
+                        </div>
+                        <button class="restart-btn" id="listen-restart" type="button" hidden data-cursor="מחדש">↺ מההתחלה</button>
+                    </div>
+                    <div class="player-bar"><span id="listen-bar"></span></div>
+                    <div class="chat" id="listen-chat" aria-live="polite">
+                        <p class="chat-empty">לחצו על הכפתור והפעילו את הרמקול.<br>המיילים בשיחה לדוגמה בלבד.</p>
+                    </div>
+                    <div class="chat-legend"><span class="lg-sys">המערכת</span><span class="lg-you">אתם</span><span class="lg-key">לחיצה על מקש</span></div>
+                </div>
+            </div>
+        </section>
+
         <!-- השיחה: גוללים, והטלפון מדגים שלב אחרי שלב -->
         <section class="call" id="call" data-tone="light">
             <div class="sticky">
-                <div class="section-top"><span>השיחה</span><span>הקישו על המקשים בעצמכם</span></div>
+                <div class="section-top"><span>עכשיו אתם</span><span>הקישו על המקשים בעצמכם</span></div>
                 <div class="call-copy" id="call-copy">
                     <p class="eyebrow" id="phase-number"></p>
                     <h2 id="phase-title"></h2>
@@ -1183,7 +1273,7 @@
             sound.on = !sound.on;
             soundBtn.setAttribute('aria-pressed', sound.on);
             soundBtn.querySelector('span').textContent = sound.on ? 'השתקה' : 'הפעלת קול';
-            if (sound.on) { audioCtx(); warmUp(); startPhase(Math.max(0, phase)); }
+            if (sound.on) { pauseListen(); audioCtx(); warmUp(); startPhase(Math.max(0, phase)); }
             else { speak([]); }
         });
         // כשהטלפון נכנס למסך, השלב מתחיל מההתחלה. כשהוא יוצא - הקול נעצר
@@ -1202,6 +1292,203 @@
             const top = scrollY + callSection.getBoundingClientRect().top + (callSection.offsetHeight - innerHeight) * phaseSpot(n);
             scrollTo({ top, behavior: reducedMotion ? 'instant' : 'smooth' });
         });
+
+        // ---------- שיחה אמיתית: לחיצה אחת, ושומעים שיחה שלמה ----------
+        // LISTEN-TEXTS-START
+        // ✏️ התסריט של השיחה. כל משפט מוקלט מראש (תיקייה audio) - אחרי שינוי נוסח מריצים שוב את make-audio.mjs.
+        // שלושה קולות, כמו בקו האמיתי: menu = התפריטים, mail = המיילים עצמם (הקול הרגיל של גוגל), you = המתקשר.
+        const LISTEN_VOICES = { menu: 'he-IL-Chirp3-HD-Zubenelgenubi', mail: 'he-IL-Standard-D', you: 'he-IL-Chirp3-HD-Fenrir' };
+        // step = איזה שלב נדלק ברשימה (0-4). key = לחיצה על מקש, beep = צפצוף, ring = צינתוק, note = הערה בלי קול.
+        // say = מה שמוקרא בפועל, כשהוא שונה ממה שמוצג (למשל עם ניקוד, כדי שהקול יבטא נכון). בלי say - מוקרא text.
+        const LISTEN = [
+            { step: 0, voice: 'menu', text: 'יש לך שלושה מיילים חדשים מאז השיחה הקודמת.' },
+            { step: 0, voice: 'mail', text: 'מאת משה כהן, בנושא: הצעת מחיר להדפסת ההזמנות.' },
+            { step: 0, key: '1', label: 'לשמיעת המייל' },
+            { step: 0, voice: 'mail', text: 'שלום, מצרף את הצעת המחיר להדפסת חמש מאות הזמנות. המחיר כולל משלוח עד הבית.' },
+            { step: 1, key: '4', label: 'למייל הבא' },
+            { step: 1, voice: 'mail', text: 'מאת הנהלת החשבונות, בנושא: הדוח השנתי והתשלומים.' },
+            { step: 1, key: '1', label: 'לשמיעת המייל' },
+            { step: 1, voice: 'mail', text: 'תקציר המייל: הדוח השנתי מוכן. נשארו שני תשלומים פתוחים, והמועד האחרון הוא סוף החודש.', tag: 'מייל ארוך, שומעים רק תקציר' },
+            { step: 2, key: '2', label: 'לתשובה בקול' },
+            { step: 2, voice: 'menu', text: 'הקליטו את התשובה אחרי הצליל, ובסיום הקישו סולמית.' },
+            { step: 2, beep: true, note: 'צפצוף' },
+            { step: 2, voice: 'you', text: 'אממ, שלום, כן, קיבלתי. אני אעביר את התשלומים מחר, תודה רבה.', say: 'אֶמְמ, שַלוֹם, כֵן, קִבַלְתִי. אֲנִי אַעֲבִיר אֶת הַתַשְלומִים מַחַר, תוֹדַה רַבַה.' },
+            { step: 2, key: '#', label: 'סיום ההקלטה' },
+            { step: 3, voice: 'menu', text: 'זו התשובה שלכם: שלום, קיבלתי. אעביר את התשלומים מחר. תודה רבה. לשליחה הקישו 1.', tag: 'נכתב מסודר, בלי ה"אממ"' },
+            { step: 3, key: '1', label: 'שליחה' },
+            { step: 3, voice: 'menu', text: 'התשובה נשלחה.' },
+            { step: 4, ring: true, note: 'שעה אחר כך: הטלפון מצלצל לרגע. צינתוק.' },
+            { step: 4, voice: 'mail', text: 'הגיע מייל חדש מאת משה כהן.', tag: 'שלוחת הצינתוקים' }
+        ];
+        // כל המשפטים של השיחה וקול של כל אחד. גם סקריפט ההפקה משתמש בפונקציה הזו.
+        function listenTexts() { return LISTEN.filter((s) => s.text).map((s) => ({ text: s.say || s.text, voice: LISTEN_VOICES[s.voice] })); }
+        // LISTEN-TEXTS-END
+
+        // ✏️ אורך השיחה בשניות - מוצג לפני ההשמעה (נמדד: 1:01). אם הדפדפן יודע את אורך ההקלטות, הוא מחושב מחדש לבד;
+        // אחרי שינוי בתסריט - לעדכן כאן לפי מדידה.
+        let LISTEN_SECONDS = 61;
+        // הפסקות קבועות בשיחה (באלפיות שנייה), גם הן נכנסות לחישוב האורך
+        const GAP = { key: 700, beep: 800, ring: 2500, afterLine: 350 };
+        // state: idle = לא התחיל, playing = מתנגן, paused = בהשהיה, ended = הסתיים
+        const listen = { run: 0, state: 'idle', elapsed: 0, last: 0, clock: null, clipActive: false, player: new Audio() };
+        listen.player.preload = 'auto';
+        const playBtn = $('#listen-play'), restartBtn = $('#listen-restart'), chat = $('#listen-chat'), listenSteps = $$('#listen-steps li');
+        const fmtTime = (ms) => { const s = Math.round(ms / 1000); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); };
+        const lineFile = (s) => 'audio/' + speechId(LISTEN_VOICES[s.voice] + '|' + (s.say || s.text)) + '.mp3';
+
+        function showTime() { $('#listen-time').textContent = fmtTime(listen.elapsed) + ' / ' + fmtTime(LISTEN_SECONDS * 1000); }
+        function tickClock() {
+            const now = performance.now();
+            if (listen.state === 'playing') listen.elapsed += now - listen.last;
+            listen.last = now;
+            showTime();
+        }
+        // מחכה זמן "מתנגן" בלבד: בזמן השהיה השעון עוצר. מחזיר false אם השיחה הופסקה או התחילה מחדש
+        function wait(ms, run) {
+            return new Promise((res) => {
+                let left = ms, prev = performance.now();
+                const t = setInterval(() => {
+                    const now = performance.now();
+                    if (run !== listen.run) { clearInterval(t); res(false); return; }
+                    if (listen.state === 'playing') left -= now - prev;
+                    prev = now;
+                    if (left <= 0) { clearInterval(t); res(true); }
+                }, 50);
+            });
+        }
+        // משמיע משפט אחד ומחכה שייגמר (בהשהיה - ממתין, ובחזרה ממשיך מאותה נקודה).
+        // אם הקובץ לא נטען (למשל סינון) - מחכה זמן לפי אורך המשפט, וההדגמה ממשיכה בשקט
+        function playLine(s, run) {
+            return new Promise((res) => {
+                const p = listen.player, text = s.say || s.text;
+                let ended = false, failed = false, silentLeft = Math.max(1500, text.length * 75), guardLeft = silentLeft + 9000, prev = performance.now();
+                p.onended = () => { ended = true; };
+                p.onerror = () => { failed = true; };
+                p.src = lineFile(s);
+                listen.clipActive = true;
+                if (listen.state === 'playing') p.play().catch(() => { failed = true; });
+                const t = setInterval(() => {
+                    const now = performance.now(), dt = now - prev;
+                    prev = now;
+                    if (run !== listen.run) { finish(false); return; }
+                    if (listen.state !== 'playing') return;
+                    guardLeft -= dt;
+                    if (failed) silentLeft -= dt;
+                    if (ended || (failed && silentLeft <= 0) || guardLeft <= 0) finish(true);
+                }, 50);
+                function finish(ok) { clearInterval(t); p.onended = p.onerror = null; listen.clipActive = false; res(ok); }
+            });
+        }
+        function addMsg(cls, html) {
+            chat.querySelectorAll('.speaking').forEach((m) => m.classList.remove('speaking'));
+            const el = document.createElement('div');
+            el.className = 'msg ' + cls;
+            el.innerHTML = html;
+            chat.append(el);
+            chat.scrollTop = chat.scrollHeight;
+            return el;
+        }
+        const escHtml = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        function setStep(n) { listenSteps.forEach((li, i) => { li.classList.toggle('on', i === n); li.classList.toggle('done', i < n); }); }
+        // הכפתור הכתום והכותרת שלידו לפי המצב
+        function setState(state) {
+            listen.state = state;
+            const playing = state === 'playing';
+            playBtn.classList.toggle('playing', playing);
+            playBtn.setAttribute('aria-label', playing ? 'השהיה' : state === 'paused' ? 'המשך השמעה' : state === 'ended' ? 'להשמיע שוב' : 'השמעת השיחה');
+            playBtn.dataset.cursor = playing ? 'השהו' : state === 'paused' ? 'המשיכו' : 'נגנו';
+            $('#listen-title').textContent = playing ? 'מתנגן...' : state === 'paused' ? 'בהשהיה - לחצו להמשך' : state === 'ended' ? 'השיחה הסתיימה' : 'שיחה לדוגמה';
+            restartBtn.hidden = state === 'idle';
+            clearInterval(listen.clock);
+            if (playing) { listen.last = performance.now(); listen.clock = setInterval(tickClock, 250); }
+            showTime();
+        }
+
+        function pauseListen() {
+            if (listen.state !== 'playing') return;
+            tickClock();
+            setState('paused');
+            listen.player.pause();
+        }
+        function resumeListen() {
+            if (listen.state !== 'paused') return;
+            speak([]);
+            audioCtx();
+            setState('playing');
+            if (listen.clipActive && listen.player.paused) listen.player.play().catch(() => {});
+        }
+        async function playListen() {
+            listen.run++;
+            listen.player.pause();
+            speak([]);                     // משתיק את הטלפון האינטראקטיבי, אם דיבר
+            audioCtx();
+            const run = listen.run;
+            chat.innerHTML = '';
+            listen.elapsed = 0;
+            setState('playing');
+            for (let i = 0; i < LISTEN.length; i++) {
+                const s = LISTEN[i];
+                setStep(s.step);
+                $('#listen-bar').style.width = (i / LISTEN.length * 100) + '%';
+                let ok = true;
+                if (s.key) {
+                    addMsg('key', 'לחיצה על ' + (s.key === '#' ? 'סולמית' : s.key) + ' · ' + escHtml(s.label));
+                    if (DTMF[s.key]) beep(DTMF[s.key], 0, 0.16, 0.09);
+                    ok = await wait(GAP.key, run);
+                } else if (s.beep) {
+                    addMsg('note', escHtml(s.note));
+                    beep([1000], 0, 0.4, 0.07);
+                    ok = await wait(GAP.beep, run);
+                } else if (s.ring) {
+                    addMsg('note', escHtml(s.note));
+                    $('#player').classList.remove('ringing'); void $('#player').offsetWidth; $('#player').classList.add('ringing');
+                    beep([440, 480], 0, 0.9, 0.07); beep([440, 480], 1.2, 0.9, 0.07);
+                    ok = await wait(GAP.ring, run);
+                } else {
+                    const you = s.voice === 'you';
+                    const el = addMsg(you ? 'you' : 'sys', '<small>' + (you ? 'אתם' : 'המערכת') + '</small>' + escHtml(s.text) + (s.tag ? '<span class="tag">' + escHtml(s.tag) + '</span>' : ''));
+                    el.classList.add('speaking');
+                    ok = await playLine(s, run);
+                    el.classList.remove('speaking');
+                    if (ok) ok = await wait(GAP.afterLine, run);
+                }
+                if (!ok) return;            // התחילו מחדש באמצע
+            }
+            $('#listen-bar').style.width = '100%';
+            setStep(LISTEN_STEPS_DONE);
+            tickClock();
+            setState('ended');
+        }
+        const LISTEN_STEPS_DONE = 5;      // כל השלבים מסומנים כגמורים
+        playBtn.addEventListener('click', () => {
+            if (listen.state === 'playing') pauseListen();
+            else if (listen.state === 'paused') resumeListen();
+            else playListen();
+        });
+        restartBtn.addEventListener('click', () => playListen());
+        // גוללים הלאה מהנגן - השיחה בהשהיה, ואפשר להמשיך מאותה נקודה
+        new IntersectionObserver((entries) => { if (!entries[0].isIntersecting) pauseListen(); }, { threshold: 0 }).observe($('#listen'));
+        // האורך המדויק: כשהחלק מתקרב למסך, טוענים רק את פרטי ההקלטות (בלי להשמיע) ומחשבים מחדש
+        let lengthChecked = false;
+        new IntersectionObserver((entries) => {
+            if (!entries[0].isIntersecting || lengthChecked) return;
+            lengthChecked = true;
+            const lines = LISTEN.filter((s) => s.text);
+            let total = 0, pending = lines.length, failed = false;
+            lines.forEach((s) => {
+                const a = new Audio();
+                a.preload = 'metadata';
+                a.onloadedmetadata = () => { if (!isFinite(a.duration)) failed = true; else total += a.duration * 1000; if (--pending === 0 && !failed) done(); };
+                a.onerror = () => { failed = true; };
+                a.src = lineFile(s);
+            });
+            function done() {
+                const gaps = LISTEN.reduce((sum, s) => sum + (s.key ? GAP.key : s.beep ? GAP.beep : s.ring ? GAP.ring : GAP.afterLine), 0);
+                LISTEN_SECONDS = Math.round((total + gaps) / 1000);
+                showTime();
+            }
+        }, { rootMargin: '400px' }).observe($('#listen'));
+        showTime();
 
         // ---------- כל מה שתלוי בגלילה ----------
         function scrollUpdate() {
